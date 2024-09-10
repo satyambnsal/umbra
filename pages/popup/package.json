@@ -19,15 +19,29 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@extension/content-runtime-script": "workspace:*",
     "@extension/shared": "workspace:*",
     "@extension/storage": "workspace:*",
-    "@extension/content-runtime-script": "workspace:*"
+    "@headlessui/react": "2.1.2",
+    "chalk": "^5.3.0",
+    "clsx": "2.1.1",
+    "dayjs": "1.11.12",
+    "jotai": "^2.9.3",
+    "lucide-react": "^0.439.0",
+    "next-themes": "0.3.0",
+    "react-router-dom": "6.25.1",
+    "sonner": "^1.5.0"
   },
   "devDependencies": {
     "@extension/tailwindcss-config": "workspace:*",
     "@extension/tsconfig": "workspace:*",
     "@extension/vite-config": "workspace:*",
+    "cross-env": "^7.0.3",
+    "daisyui": "^4.12.10",
     "postcss-load-config": "^6.0.1",
-    "cross-env": "^7.0.3"
+    "react-error-boundary": "4.0.13",
+    "tailwindcss": "^3.4.10",
+    "tailwindcss-animate": "1.0.7",
+    "vite-plugin-svgr": "4.2.0"
   }
 }
