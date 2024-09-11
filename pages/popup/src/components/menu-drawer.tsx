@@ -42,6 +42,7 @@ export const MenuDrawer = () => {
                 htmlFor="menu-drawer"
                 className="btn btn-circle min-h-10 h-10 w-10 btn-primary bg-white hover:bg-white shadow-none border-none">
                 <XIcon />
+                <span className="hidden">x</span>
               </label>
             </div>
           </div>
@@ -56,6 +57,10 @@ export const MenuDrawer = () => {
 
             <button type="button" onClick={() => navigate('/accounts')}>
               Accounts
+            </button>
+
+            <button type="button" onClick={() => navigate('/settings')}>
+              Settings
             </button>
 
             <button type="button" onClick={() => navigate('/')}>

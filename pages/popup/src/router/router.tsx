@@ -12,6 +12,10 @@ import { TransactionsRoute } from '../transactions/routes/transactions.js';
 import { TransactionDetailsRoute } from '../transactions/routes/transaction-details.js';
 import { NetworksRoute } from '../wallet/routes/networks.js';
 import { SendRoute } from '../send/routes/send.js';
+import { SettingsRoute } from '@src/settings/routes/settings.js';
+import { KeysRoute } from '@src/settings/routes/keys.js';
+import { AboutRoute } from '@src/settings/routes/about.js';
+import { NewNomineeRoute } from '@src/settings/routes/new-nominee.js';
 
 export const Router = () => {
   return (
@@ -33,6 +37,20 @@ export const Router = () => {
 
             <Route path="/transactions" element={<TransactionsRoute />} />
             <Route path="/transactions/:hash" element={<TransactionDetailsRoute />} />
+
+            <Route path="settings" element={<Outlet />}>
+              <Route path="" element={<SettingsRoute />} />
+
+              <Route path="keys" element={<Outlet />}>
+                <Route path="" element={<KeysRoute />} />
+              </Route>
+
+              <Route path="about" element={<Outlet />}>
+                <Route path="" element={<AboutRoute />} />
+              </Route>
+
+              <Route path="nominee" element={<NewNomineeRoute />} />
+            </Route>
           </Routes>
         </MemoryRouter>
       </div>
