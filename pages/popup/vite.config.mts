@@ -13,7 +13,7 @@ export default withPageConfig({
   resolve: {
     alias: {
       '@src': srcDir,
-      // '@aztec/bb.js': resolve(__dirname, './public/bb_0.51.0.js'),
+      '@aztec/bb.js': resolve(__dirname, './public/bb_0.51.0.js'),
     },
   },
   publicDir: resolve(rootDir, 'public'),
