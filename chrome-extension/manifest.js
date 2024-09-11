@@ -58,6 +58,9 @@ const manifest = deepmerge(
         css: ['content.css'], // public folder
       },
     ],
+    content_security_policy: {
+      extension_pages: "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
+    },
     devtools_page: 'devtools/index.html',
     web_accessible_resources: [
       {
