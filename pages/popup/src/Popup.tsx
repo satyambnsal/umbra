@@ -5,7 +5,7 @@ import { withErrorBoundary, withSuspense } from '@extension/shared';
 // import { exampleThemeStorage } from '@extension/storage';
 // import type { ComponentPropsWithoutRef } from 'react';
 import LoadingScreen from './components/top-loading';
-// import { Router } from './router/router';
+import { Router } from './router/router';
 import { ThemeProvider } from 'next-themes';
 import { useEffect, useState } from 'react';
 import type { PXE } from '@aztec/aztec.js';

@@ -6,7 +6,7 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 const rootDir = resolve(__dirname);
 const srcDir = resolve(rootDir, 'src');
 
-const aztecVersion = '0.51.0';
+// const aztecVersion = '0.51.0';
 
 export default withPageConfig({
   plugins: [nodePolyfills(), svgr()],
