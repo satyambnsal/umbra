@@ -1,16 +1,17 @@
 import '@src/Popup.css';
 import './assets/app.css';
-
 import { withErrorBoundary, withSuspense } from '@extension/shared';
 // import { exampleThemeStorage } from '@extension/storage';
 // import type { ComponentPropsWithoutRef } from 'react';
-import LoadingScreen from './components/top-loading';
-import { Router } from './router/router';
+// import LoadingScreen from './components/top-loading';
 import { ThemeProvider } from 'next-themes';
 import { useEffect, useState } from 'react';
 import type { PXE } from '@aztec/aztec.js';
 import { createPXEClient, waitForPXE } from '@aztec/aztec.js';
-import { RPC_URL } from './constants';
+// import { RPC_URL } from './constants';
+import { RPC_URL } from './constants.js';
+import LoadingScreen from './components/top-loading.js';
+import { Router } from './router/router.js';
 
 const Popup = () => {
   const [pxeClient, setPXEClient] = useState<PXE>();
@@ -21,7 +22,7 @@ const Popup = () => {
     setIsLoading(true);
     const pxe = createPXEClient(RPC_URL);
     waitForPXE(pxe)
-      .then(_ => setPXEClient(pxe))
+      .then(() => setPXEClient(pxe))
       .catch(error => {
         setErrorMessage(error.toString());
       })
@@ -36,7 +37,7 @@ const Popup = () => {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {isLoading && <p>is loading</p>}
           {errorMessage && <p>{errorMessage}</p>}
-          {/* <Router /> */}
+          <Router />
         </ThemeProvider>
       </LoadingScreen>
     </>

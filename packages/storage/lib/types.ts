@@ -15,6 +15,12 @@ export type ThemeStorage = BaseStorage<Theme> & {
   toggle: () => Promise<void>;
 };
 
+export type RPC_URL = string;
+
+export type RPCURLStorage = BaseStorage<RPC_URL> & {
+  setRpcURL: () => Promise<void>;
+};
+
 export type StorageConfig<D = string> = {
   /**
    * Assign the {@link StorageEnum} to use.

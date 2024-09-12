@@ -12,7 +12,7 @@
 
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     // "types": ["react"],
     "target": "ESNext",
     "useDefineForClassFields": true,

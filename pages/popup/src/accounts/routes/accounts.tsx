@@ -1,4 +1,3 @@
-import React from 'react';
 import { SwitchAccountView } from '../views/accounts.js';
 import { useNavigate } from 'react-router-dom';
 
