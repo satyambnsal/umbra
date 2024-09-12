@@ -3,14 +3,11 @@ import '@src/NewTab.scss';
 import { useStorage, withErrorBoundary, withSuspense } from '@extension/shared';
 import { exampleThemeStorage } from '@extension/storage';
 import { Button } from '@extension/ui';
-import { t } from '@extension/i18n';
 
 const NewTab = () => {
   const theme = useStorage(exampleThemeStorage);
   const isLight = theme === 'light';
   const logo = isLight ? 'new-tab/logo_horizontal.svg' : 'new-tab/logo_horizontal_dark.svg';
-
-  console.log(t('hello', 'World'));
 
   return (
     <div className={`App ${isLight ? 'bg-slate-50' : 'bg-gray-800'}`}>
@@ -21,7 +18,7 @@ const NewTab = () => {
         </p>
         <h6>The color of this paragraph is defined using SASS.</h6>
         <Button className="mt-4" onClick={exampleThemeStorage.toggle} theme={theme}>
-          {t('toggleTheme')}
+          Toggle Theme
         </Button>
       </header>
     </div>
