@@ -1,11 +1,11 @@
 {
   "extensionDescription": {
-    "description": "Extension description",
-    "message": "Chrome extension boilerplate developed with Vite, React and Typescript"
+    "description": "Umbra wallet",
+    "message": "Umbra wallet developed for privacy focused aztec chain"
   },
   "extensionName": {
     "description": "Extension name",
-    "message": "Chrome extension boilerplate"
+    "message": "Umbra Wallet"
   },
   "toggleTheme": {
     "message": "Toggle theme"

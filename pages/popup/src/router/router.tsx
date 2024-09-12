@@ -1,7 +1,6 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import { Toaster } from 'sonner';
 import { MemoryRouter, Outlet, Route, Routes } from 'react-router-dom';
-import React from 'react';
 import { ErrorView } from '../error-renderer/views/error.js';
 import { StartRoute } from '../onboarding/routes/start.js';
 import { CreateWalletRoute } from '../onboarding/routes/create-wallet.js';
@@ -16,6 +15,8 @@ import { SettingsRoute } from '@src/settings/routes/settings.js';
 import { KeysRoute } from '@src/settings/routes/keys.js';
 import { AboutRoute } from '@src/settings/routes/about.js';
 import { NewNomineeRoute } from '@src/settings/routes/new-nominee.js';
+import { UnlockWalletRoute } from '@src/lock/routes/unlock-wallet.js';
+import { NotFoundRoute } from '@src/not-found/routes/not-found.js';
 
 export const Router = () => {
   return (
@@ -51,6 +52,9 @@ export const Router = () => {
 
               <Route path="nominee" element={<NewNomineeRoute />} />
             </Route>
+            <Route path="/unlock" element={<UnlockWalletRoute />} />
+
+            <Route path="/*" element={<NotFoundRoute />} />
           </Routes>
         </MemoryRouter>
       </div>

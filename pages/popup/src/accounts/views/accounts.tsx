@@ -1,4 +1,3 @@
-import React from 'react';
 import { MenuBar } from '../../components/menu-bar.js';
 import { SwitchAccounts } from '../components/switch-account.js';
 

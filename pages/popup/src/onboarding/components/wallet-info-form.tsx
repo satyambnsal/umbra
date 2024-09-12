@@ -1,4 +1,3 @@
-import React from 'react';
 import { WizardLayout } from '../../components/wizard-layout.js';
 import { Loader2Icon } from 'lucide-react';
 

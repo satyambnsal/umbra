@@ -1,7 +1,6 @@
 import AztecIcon from '../../common/assets/aztec.svg?react';
 // import ZekoIcon from "@/common/assets/zeko.svg?react"
 // import { MenuBar } from "@/components/menu-bar"
-import React from 'react';
 import { MenuBar } from '../../components/menu-bar.js';
 
 const NETWORKS = [

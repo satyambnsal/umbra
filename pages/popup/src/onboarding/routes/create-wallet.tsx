@@ -23,6 +23,7 @@ export const CreateWalletRoute = () => {
     // if (wallet) {
     //   setWallets([...wallets, wallet]);
     // }
+    localStorage.setItem('wallet-address', '0X12kjvasofiusadfkjs');
     setIsProgress(false);
     navigate('/dashboard');
     toast(<>Account 0X12kjvasofiusadfkjs create successfully</>);
