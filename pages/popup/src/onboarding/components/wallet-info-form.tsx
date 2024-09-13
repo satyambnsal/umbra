@@ -1,13 +1,15 @@
+import { useState } from 'react';
 import { WizardLayout } from '../../components/wizard-layout.js';
 import { Loader2Icon } from 'lucide-react';
 
 interface WalletInfoFormProps {
   title: string;
-  onSubmit: () => void;
+  onSubmit: (ailas: string) => void;
   isProgress: boolean;
 }
 
 export const WalletInfoForm = ({ title, onSubmit, isProgress }: WalletInfoFormProps) => {
+  const [alias, setAlias] = useState('');
   return (
     <WizardLayout
       title={title}
@@ -18,7 +20,7 @@ export const WalletInfoForm = ({ title, onSubmit, isProgress }: WalletInfoFormPr
             type="button"
             className="btn btn-primary max-w-48 w-full"
             onClick={() => {
-              onSubmit();
+              onSubmit(alias);
             }}
             data-testid="formSubmit"
             disabled={isProgress}>
@@ -31,7 +33,7 @@ export const WalletInfoForm = ({ title, onSubmit, isProgress }: WalletInfoFormPr
       <div className="flex flex-col flex-1 gap-4">
         <div className="flex flex-col">
           <label htmlFor="walletNameInput" className="label">
-            Account name
+            Account Name
           </label>
           <input
             id="walletNameInput"
@@ -39,6 +41,10 @@ export const WalletInfoForm = ({ title, onSubmit, isProgress }: WalletInfoFormPr
             data-testid="onboarding/walletNameInput"
             className="input"
             autoComplete="off"
+            value={alias}
+            onChange={e => {
+              setAlias(e.target.value);
+            }}
           />
         </div>
       </div>

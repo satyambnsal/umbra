@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { OverviewView } from '../views/overview.js';
 import { currentWalletAtom } from '@src/atoms.js';
 // import { useAccount } from "../../hooks/useAccounts.js";
@@ -21,7 +21,7 @@ export const OverviewRoute = () => {
   // const [tokenContract, setTokenContract] = useState<Contract | null>(null);
   const [isProgress, setIsProgress] = useState(false);
   // const { deployToken } = useAccount();
-  const [currentWallet] = useAtom(currentWalletAtom);
+  const currentWallet = useAtomValue(currentWalletAtom);
 
   const handleDeployToken = async () => {
     if (!currentWallet) {
@@ -36,7 +36,7 @@ export const OverviewRoute = () => {
   };
 
   // Get the public address from the current wallet
-  const publicAddress = '0X193jlsafkms9d9003rnq2f09q230r2inf02je09j';
+  const publicAddress = currentWallet ? currentWallet.account.getAddress().toString() : 'No Account found';
 
   return (
     <OverviewView
