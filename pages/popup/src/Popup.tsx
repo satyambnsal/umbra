@@ -5,38 +5,58 @@ import { withErrorBoundary, withSuspense } from '@extension/shared';
 // import type { ComponentPropsWithoutRef } from 'react';
 // import LoadingScreen from './components/top-loading';
 import { ThemeProvider } from 'next-themes';
-import { useEffect, useState } from 'react';
-import type { PXE } from '@aztec/aztec.js';
-import { createPXEClient, waitForPXE } from '@aztec/aztec.js';
+// import { useCallback, useEffect, useState } from 'react';
+// import type { PXE } from '@aztec/aztec.js';
+// import { createPXEClient, waitForPXE } from '@aztec/aztec.js';
 // import { RPC_URL } from './constants';
-import { RPC_URL } from './constants.js';
+// import { RPC_URL } from './constants.js';
 import LoadingScreen from './components/top-loading.js';
 import { Router } from './router/router.js';
+// import { createPXEClient, waitForPXE } from '@aztec/aztec.js';
+// import { useCallback, useEffect, useState } from 'react';
+// import { useAtom } from 'jotai';
+// import { walletStorage } from '@extension/storage';
+// import { pxeAtom } from './atoms.js';
+// import { useAtom } from 'jotai';
+// import { walletStorage } from '@extension/storage';
+// import { pxeAtom } from './atoms.js';
 
 const Popup = () => {
-  const [pxeClient, setPXEClient] = useState<PXE>();
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  useEffect(() => {
-    setErrorMessage('');
-    setIsLoading(true);
-    const pxe = createPXEClient(RPC_URL);
-    waitForPXE(pxe)
-      .then(() => setPXEClient(pxe))
-      .catch(error => {
-        setErrorMessage(error.toString());
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-  console.log('pxe client', pxeClient);
+  // const [pxeClient, setPXEClient] = useAtom(pxeAtom);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState('');
+  // const walletData = useStorage(walletStorage);
+  // const handlePXEConnection = useCallback(() => {
+  //   setErrorMessage('');
+  //   setIsLoading(true);
+  //   const pxe = createPXEClient(walletData.rpcUrl);
+  //   waitForPXE(pxe)
+  //     .then(() => setPXEClient(pxe))
+  //     .catch(error => {
+  //       setErrorMessage(error.toString());
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [walletData.rpcUrl]);
+
+  // useEffect(() => {
+  //   handlePXEConnection();
+  // }, [handlePXEConnection]);
+
+  // console.log('pxe client 44', pxeClient);
   return (
     <>
       <LoadingScreen isLoading={false}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {isLoading && <p>is loading</p>}
-          {errorMessage && <p>{errorMessage}</p>}
+          {/* {isLoading && <p>is loading</p>}
+          {errorMessage && (
+            <div>
+              <p>{errorMessage}</p>
+              <button onClick={handlePXEConnection}>Try Reconnect</button>
+            </div>
+          )} */}
           <Router />
         </ThemeProvider>
       </LoadingScreen>

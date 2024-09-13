@@ -15,10 +15,16 @@ export type ThemeStorage = BaseStorage<Theme> & {
   toggle: () => Promise<void>;
 };
 
-export type RPC_URL = string;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AztecAccount = any;
+export type Wallet = {
+  rpcUrl: string;
+  accounts: AztecAccount[];
+};
 
-export type RPCURLStorage = BaseStorage<RPC_URL> & {
-  setRpcURL: () => Promise<void>;
+export type WalletStorage = BaseStorage<Wallet> & {
+  setRpcURL: (newUrl: string) => Promise<void>;
+  addAccount: (newAccount: AztecAccount) => Promise<void>;
 };
 
 export type StorageConfig<D = string> = {

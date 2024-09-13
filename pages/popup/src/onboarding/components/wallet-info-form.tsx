@@ -31,11 +31,11 @@ export const WalletInfoForm = ({ title, onSubmit, isProgress }: WalletInfoFormPr
       <div className="flex flex-col flex-1 gap-4">
         <div className="flex flex-col">
           <label htmlFor="walletNameInput" className="label">
-            Wallet name
+            Account name
           </label>
           <input
             id="walletNameInput"
-            placeholder="Set wallet name"
+            placeholder="Set account name"
             data-testid="onboarding/walletNameInput"
             className="input"
             autoComplete="off"

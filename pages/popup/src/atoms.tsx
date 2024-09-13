@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import { PXE, AccountWalletWithSecretKey } from '@aztec/aztec.js';
 import { atom } from 'jotai';
 

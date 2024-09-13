@@ -11,7 +11,7 @@ export const ErrorView = ({ error, resetErrorBoundary }: FallbackProps) => {
         <div className="card-body flex-1 flex flex-col gap-4 p-4">
           <h1 className="text-xl">Woops</h1>
           <p className="flex-[0] text-gray-400">An error happened.</p>
-          <a href="https://get.pallad.co/status" target="_blank" rel="noopener noreferrer" className="underline">
+          <a href="https://google.com" target="_blank" rel="noopener noreferrer" className="underline">
             Check services status.
           </a>
           <textarea

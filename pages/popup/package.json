@@ -4,6 +4,7 @@
   "description": "chrome extension - popup",
   "private": true,
   "sideEffects": true,
+  "type": "module",
   "files": [
     "dist/**"
   ],
@@ -36,26 +37,29 @@
     "lucide-react": "^0.439.0",
     "next-themes": "0.3.0",
     "react-router-dom": "6.25.1",
+    "react-use": "^17.5.1",
     "sonner": "^1.5.0",
     "webextension-polyfill": "0.12.0"
   },
   "devDependencies": {
-    "@types/node": "^22.3.0",
-    "@types/react": "^18.3.4",
-    "patch-package": "^8.0.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "node-stdlib-browser": "^1.2.0",
-    "vite-plugin-node-polyfills": "^0.22.0",
-    "vite-plugin-resolve": "^2.5.2",
     "@extension/tailwindcss-config": "workspace:*",
     "@extension/tsconfig": "workspace:*",
     "@extension/vite-config": "workspace:*",
+    "@extension/storage": "workspace:*",
+    "@extension/shared": "workspace:*",
+    "@types/node": "^22.3.0",
+    "@types/react": "^18.3.4",
+    "@vitejs/plugin-react": "^4.3.1",
     "cross-env": "^7.0.3",
     "daisyui": "^4.12.10",
+    "node-stdlib-browser": "^1.2.0",
+    "patch-package": "^8.0.0",
     "postcss-load-config": "^6.0.1",
     "react-error-boundary": "4.0.13",
     "tailwindcss": "^3.4.10",
     "tailwindcss-animate": "1.0.7",
+    "vite-plugin-node-polyfills": "^0.22.0",
+    "vite-plugin-resolve": "^2.5.2",
     "vite-plugin-svgr": "4.2.0"
   }
 }

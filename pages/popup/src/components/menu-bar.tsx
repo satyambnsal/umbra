@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ChevronDownIcon, ChevronUpIcon, XIcon } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { truncateString } from '../common/lib/string.js';
 import { MenuDrawer } from './menu-drawer.js';
@@ -51,6 +51,7 @@ export const MenuBar = ({
 }: MenuBarProps) => {
   const navigate = useNavigate();
   const goHome = () => navigate('/dashboard');
+  const [isPrivate, setIsPrivate] = useState(false);
   switch (variant) {
     case 'dashboard':
       return (
@@ -65,8 +66,21 @@ export const MenuBar = ({
             </Link>
           )}
           <div className="flex gap-2 mt-2">
-            <button className="btn btn-secondary btn-sm">Public</button>
-            <button className="btn btn-primary btn-sm">Private</button>
+            <button
+              className={`btn  ${!isPrivate ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+              onClick={() => {
+                setIsPrivate(false);
+              }}>
+              Public
+            </button>
+
+            <button
+              className={`btn  ${isPrivate ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+              onClick={() => {
+                setIsPrivate(true);
+              }}>
+              Private
+            </button>
           </div>
         </MenuBarBase>
       );
