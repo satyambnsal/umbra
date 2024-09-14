@@ -1,11 +1,12 @@
 import { MenuBar } from '../../components/menu-bar.js';
 import { SendForm } from '../components/send-form.js';
+import { sendTokenFnType } from '../routes/send.js';
 
 type SendViewProps = {
   onGoBack: () => void;
   balance: number;
   currentNetwork: string;
-  sendToken: (receiverAddress: string, amount: string) => void;
+  sendToken: sendTokenFnType;
   isProgress: boolean;
 };
 

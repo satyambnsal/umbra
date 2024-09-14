@@ -14,7 +14,7 @@ export const tokenContractsAtom = atom<TokenContract[]>([]);
 export const publicBalanceAtom = atom<BigInt>(0n);
 export const privateBalanceAtom = atom<BigInt>(0n);
 
-export const isPrivateAtom = atom<boolean>();
+export const isPrivateAtom = atom<boolean>(false);
 
 // // Setter atom for current wallet
 // export const setCurrentWalletAtom = atom(null, (get, set, newWallet: AccountWalletWithSecretKey | null) => {

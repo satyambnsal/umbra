@@ -5,7 +5,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback, useEffect, useState } from 'react';
 import { useInterval } from 'react-use';
 
-const DELAY = 5000;
+const DELAY = 20000;
 
 export const useBalance = () => {
   const currentWallet = useAtomValue(currentWalletAtom);

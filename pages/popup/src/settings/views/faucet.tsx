@@ -43,8 +43,6 @@ export const FaucetView = ({ onCloseClicked }: keysViewProps) => {
     console.log('Token Contract deployed for address', tokenContact?.contractAddress);
     if (!selectedTokenContract && tokenContact) {
       setSelectedTokenContract(tokenContact);
-    } else {
-      toast.error('Failed to deploy token contract');
     }
     setIsDeployProgress(false);
   };
@@ -94,6 +92,7 @@ export const FaucetView = ({ onCloseClicked }: keysViewProps) => {
     const receipt1 = await tx1.wait();
     console.log(`Transaction has been mined on block ${receipt1.blockNumber}`);
     setIsMintPrivateProgress(false);
+    toast.success('100 private token minted successfully');
   };
 
   const handleMintPublic = async () => {
@@ -115,8 +114,10 @@ export const FaucetView = ({ onCloseClicked }: keysViewProps) => {
     const receipt = await tx.wait();
     console.log(`Transaction has been mined on block ${receipt.blockNumber}`);
     setIsMintPublicProgress(false);
+    toast.success('100 public token minted successfully');
   };
 
+  const isTokenAvailable = currenWalletContracts.length > 0 && selectedTokenContract;
   return (
     <div className="flex flex-col flex-1 bg-[#1a2b3c] h-full" data-testid="appLayout">
       <SettingsPageLayout title="Faucet" onCloseClicked={onCloseClicked}>
@@ -161,7 +162,7 @@ export const FaucetView = ({ onCloseClicked }: keysViewProps) => {
           </form>
 
           <div className="flex items-center gap-3">
-            {currenWalletContracts.length > 0 && selectedTokenContract ? (
+            {isTokenAvailable ? (
               <>
                 <p>Select Token</p>
 
@@ -177,12 +178,12 @@ export const FaucetView = ({ onCloseClicked }: keysViewProps) => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <button className="btn btn-primary w-full" onClick={handleMintPublic}>
+            <button className="btn btn-primary w-full" onClick={handleMintPublic} disabled={!isTokenAvailable}>
               Mint 100 public token
               {isMintPublicProgress && <Loader2Icon className="animate-spin" size={16} />}
             </button>
 
-            <button className="btn btn-primary w-full" onClick={handleMintPrivate}>
+            <button className="btn btn-primary w-full" onClick={handleMintPrivate} disabled={!isTokenAvailable}>
               Mint 100 private token
               {isMintPrivateProgress && <Loader2Icon className="animate-spin" size={16} />}
             </button>

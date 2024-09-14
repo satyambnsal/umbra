@@ -1,11 +1,12 @@
 // import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MenuBar } from '../../components/menu-bar.js';
-import { ArrowRightIcon, Loader2Icon } from 'lucide-react';
+import { ArrowRightIcon, RefreshCw } from 'lucide-react';
 import { TxTile } from '../../components/tx-tile.js';
 import { currentTokenContractAtom, isPrivateAtom, privateBalanceAtom, publicBalanceAtom } from '@src/atoms.js';
 import { useAtomValue } from 'jotai';
 import { useBalance } from '@src/hooks/useBalance.js';
+import { useState } from 'react';
 
 type OverviewViewProps = {
   publicAddress: string;
@@ -16,9 +17,10 @@ export const OverviewView = ({ transactions, publicAddress }: OverviewViewProps)
   const navigate = useNavigate();
   const currentTokenContract = useAtomValue(currentTokenContractAtom);
   const isPrivate = useAtomValue(isPrivateAtom);
-  const { fetchBalance } = useBalance();
+  const { fetchBalance, isFetching } = useBalance();
   const publicBalance = useAtomValue(publicBalanceAtom);
   const privateBalance = useAtomValue(privateBalanceAtom);
+  // const [isFetchingOnButton, setIsFetchingOnButton] = useState(false)
 
   console.log('overview', { publicBalance, privateBalance });
 
@@ -29,17 +31,19 @@ export const OverviewView = ({ transactions, publicAddress }: OverviewViewProps)
         <div className="card flex-col bg-secondary rounded-t-none px-8 pb-6 gap-12 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-primary text-base font-semibold">Portfolio value</h1>
+
+            <button onClick={fetchBalance}>
+              <RefreshCw className={`${isFetching && 'animate-spin'}`} />
+            </button>
           </div>
+
           <h2 className="flex items-end">
             <span className="flex items-center text-4xl">
               <span className="mr-1">{currentTokenContract ? currentTokenContract.symbol : '--'}</span>
               {isPrivate ? privateBalance.toString() : publicBalance.toString()}
             </span>
           </h2>
-          <button onClick={fetchBalance}>
-            {' '}
-            <Loader2Icon />
-          </button>
+
           <div className="flex gap-4">
             <button
               type="button"
@@ -60,6 +64,7 @@ export const OverviewView = ({ transactions, publicAddress }: OverviewViewProps)
             </button>
           </div>
         </div>
+
         <div className="flex flex-col px-8 py-4 gap-3 pb-16">
           <div className="flex justify-between items-end">
             <div className="flex flex-col gap-1">

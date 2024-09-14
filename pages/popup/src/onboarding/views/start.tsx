@@ -13,7 +13,7 @@ type OptionCardProps = {
   testId: string;
 };
 
-const OptionCard = ({ title, description, icon, disabled, onClick, testId }: OptionCardProps) => {
+export const OptionCard = ({ title, description, icon, disabled, onClick, testId }: OptionCardProps) => {
   return (
     <button
       type="button"

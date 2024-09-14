@@ -25,6 +25,7 @@ import { currentTokenContractAtom, pxeAtom, tokenContractsAtom } from '@src/atom
 import { FaucetRoute } from '@src/settings/routes/faucet.js';
 import { useLoadAccountFromStorage } from '@src/hooks/useLoadAccountsFromStorage.js';
 import { useBalance } from '@src/hooks/useBalance.js';
+import { TokensRoute } from '@src/settings/routes/tokens.js';
 
 export const Router = () => {
   const walletData = useStorage(walletStorage);
@@ -72,6 +73,7 @@ export const Router = () => {
               </Route>
 
               <Route path="nominee" element={<NewNomineeRoute />} />
+              <Route path="tokens" element={<TokensRoute />} />
             </Route>
             <Route path="/unlock" element={<UnlockWalletRoute />} />
 
