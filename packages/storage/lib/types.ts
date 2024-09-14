@@ -15,6 +15,33 @@ export type ThemeStorage = BaseStorage<Theme> & {
   toggle: () => Promise<void>;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AztecAccount = {
+  address: string;
+  secretKey: string;
+  salt: string;
+  alias: string;
+  type: string;
+};
+export type TokenContract = {
+  name: string;
+  symbol: string;
+  contractAddress: string;
+  deployerAddress: string;
+};
+
+export type Wallet = {
+  rpcUrl: string;
+  accounts: AztecAccount[];
+  tokenContracts: TokenContract[];
+};
+
+export type WalletStorage = BaseStorage<Wallet> & {
+  setRpcURL: (newUrl: string) => Promise<void>;
+  addAccount: (newAccount: AztecAccount) => Promise<void>;
+  addTokenContract: (tokenContract: TokenContract) => Promise<void>;
+};
+
 export type StorageConfig<D = string> = {
   /**
    * Assign the {@link StorageEnum} to use.

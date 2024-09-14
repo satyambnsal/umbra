@@ -1,0 +1,40 @@
+@import url('reset.css');
+
+body {
+  font-size: 16px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+
+#root{
+  min-height: 100vh;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(1); }
+  to { transform: scale(2); opacity: 0; }
+}
+
+.animate-fadeout {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+.animate-scaleup {
+  animation: scaleUp 0.5s ease-in-out forwards;
+}

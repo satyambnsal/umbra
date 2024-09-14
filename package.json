@@ -1,7 +1,7 @@
 {
   "name": "chrome-extension-boilerplate-react-vite",
   "version": "0.3.2",
-  "description": "chrome extension boilerplate",
+  "description": "Umbra Wallet",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -63,7 +63,8 @@
     "turbo": "^2.0.12",
     "typescript": "5.5.4",
     "vite": "5.4.3",
-    "run-script-os": "^1.1.6"
+    "run-script-os": "^1.1.6",
+    "@types/webextension-polyfill": "0.10.7"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json}": [
