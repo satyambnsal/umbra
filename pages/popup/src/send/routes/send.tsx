@@ -1,97 +1,66 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { SendView } from '../views/send.js';
-import chalk from 'chalk';
+import { useAtomValue } from 'jotai';
+import { currentWalletAtom, isPrivateAtom, tokenContractsAtom } from '@src/atoms.js';
 import { toast } from 'sonner';
+import { act, useState } from 'react';
+import { AztecAddress } from '@aztec/circuits.js';
 
 export const SendRoute = () => {
-  const [advanced, setAdvanced] = useState(false);
-  const [receipentAddress, setReceipentAddress] = useState('');
-  const [transferAmount, setTransferAmount] = useState<number>(0);
   const navigate = useNavigate();
+  const isPrivate = useAtomValue(isPrivateAtom);
+  const currentWallet = useAtomValue(currentWalletAtom);
   const [isProgress, setIsProgress] = useState(false);
+  const tokenContracts = useAtomValue(tokenContractsAtom);
+  const walletAddress = currentWallet?.account.getAddress().toString();
 
-  // const handlePublicTransfer = async () => {
-  //   if (
-  //     !receipentAddress ||
-  //     transferAmount === 0 ||
-  //     !tokenContract ||
-  //     !currentWallet
-  //   ) {
-  //     return toast.error(`Invalid call`);
-  //   }
-  //   try {
-  //     setIsProgress(true);
+  const currentUserTokenContract = tokenContracts.filter(tokenContract => {
+    return tokenContract.deployerAddress === walletAddress;
+  });
 
-  //     const tx = await tokenContract.methods
-  //       .transfer_public(
-  //         currentWallet.getAddress(),
-  //         receipentAddress,
-  //         BigInt(transferAmount),
-  //         BigInt(0)
-  //       )
-  //       .send();
-  //     console.log(`Sent mint transaction ${await tx.getTxHash()}`);
-  //     console.log(chalk.blackBright("Awaiting transaction to be mined"));
-  //     const receipt1 = await tx.wait();
-  //     console.log(
-  //       chalk.green(
-  //         `Transaction has been mined on block ${chalk.bold(
-  //           receipt1.blockNumber
-  //         )}`
-  //       )
-  //     );
-  //   } catch (e: any) {
-  //     toast.error(e.toString());
-  //   } finally {
-  //     setIsProgress(false);
-  //   }
-  // };
-  // const handlePrivateTransfer = async () => {
-  //   if (
-  //     !receipentAddress ||
-  //     transferAmount === 0 ||
-  //     !tokenContract ||
-  //     !currentWallet
-  //   ) {
-  //     return toast.error(`Invalid call`);
-  //   }
+  const activeTokenContract = currentUserTokenContract[currentUserTokenContract.length - 1];
 
-  //   try {
-  //     setIsInProgressObj({ ...isInProgressObj, transferPrivate: true });
-  //     const tx = (
-  //       await TokenContract.at(tokenContract.address, currentWallet)
-  //     ).methods
-  //       .transfer(receipentAddress as any as AztecAddress, transferAmount)
-  //       .send();
-  //     console.log(`Sent mint transaction ${await tx.getTxHash()}`);
-  //     console.log(chalk.blackBright("Awaiting transaction to be mined"));
-  //     const receipt1 = await tx.wait();
-  //     console.log(
-  //       chalk.green(
-  //         `Transaction has been mined on block ${chalk.bold(
-  //           receipt1.blockNumber
-  //         )}`
-  //       )
-  //     );
-  //   } catch (e: any) {
-  //     toast.error(e.toString());
-  //   } finally {
-  //     setIsInProgressObj({ ...isInProgressObj, transferPrivate: false });
-  //   }
-  // };
+  console.log('active token contract', activeTokenContract);
+
+  const sendToken = async (receiverAddress: string, amount: string) => {
+    if (!receiverAddress || Number(amount) === 0 || !tokenContracts || !currentWallet) {
+      toast.error(`Invalid call`);
+      return;
+    }
+    try {
+      setIsProgress(true);
+
+      let tx;
+      if (isPrivate) {
+        tx = await activeTokenContract.methods.transfer(receiverAddress as any as AztecAddress, Number(amount)).send();
+      } else {
+        tx = activeTokenContract.methods
+          .transfer_public(
+            currentWallet.account.getAddress(),
+            AztecAddress.fromString(receiverAddress),
+            BigInt(amount),
+            BigInt(0),
+          )
+          .send();
+      }
+
+      console.log(`Sent mint transaction ${await tx.getTxHash()}`);
+      const receipt1 = await tx.wait();
+      console.log(`Transaction has been mined on block ${receipt1.blockNumber}`);
+    } catch (e: any) {
+      toast.error(e.toString());
+    } finally {
+      setIsProgress(false);
+    }
+  };
 
   return (
     <SendView
       onGoBack={() => navigate(-1)}
       balance={12}
-      fiatPrice={12}
-      advanced={advanced}
-      setAdvanced={setAdvanced}
       currentNetwork={'mainnet'}
-      // setReceipentAddress={setReceipentAddress}
-      // transferAmount={transferAmount}
+      sendToken={sendToken}
+      isProgress={isProgress}
     />
   );
 };

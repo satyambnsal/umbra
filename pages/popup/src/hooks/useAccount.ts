@@ -1,26 +1,22 @@
 import { getSchnorrAccount } from '@aztec/accounts/schnorr';
-import type { AccountWalletWithSecretKey, PXE } from '@aztec/aztec.js';
+import type { AccountWalletWithSecretKey } from '@aztec/aztec.js';
 import {
   // Contract,
-  createPXEClient,
   Fr,
-  GrumpkinScalar,
-  waitForPXE,
 } from '@aztec/aztec.js';
 import { deriveSigningKey } from '@aztec/circuits.js';
-// import { useAtomValue } from 'jotai';
-// import { pxeAtom } from '../atoms.js';
-import { RPC_URL } from '../constants.js';
 import { TokenContract } from '@aztec/noir-contracts.js';
 import { walletStorage } from '@extension/storage';
+import { useAtom, useAtomValue } from 'jotai';
+import { pxeAtom, tokenContractsAtom } from '@src/atoms.js';
+import { toast } from 'sonner';
 
 export const useAccount = () => {
-  // const pxe = useAtomValue(pxeAtom)
+  const pxeClient = useAtomValue(pxeAtom);
+  const [tokenContracts, setTokenContracts] = useAtom(tokenContractsAtom);
   const createAccount = async (alias: string) => {
     const type = 'schnorr';
     try {
-      const pxeClient = createPXEClient(RPC_URL);
-      await waitForPXE(pxeClient);
       const secretKey = Fr.random();
       const signingPrivateKey = deriveSigningKey(secretKey);
       const account = getSchnorrAccount(pxeClient!, secretKey, signingPrivateKey);
@@ -36,9 +32,20 @@ export const useAccount = () => {
           type,
         };
         console.log(accountData);
-        await walletStorage.addAccount(accountData);
+
+        const formattedData = {
+          address: address.toString(),
+          secretKey: secretKey.toString(),
+          salt: salt.toString(),
+          alias,
+          type,
+        };
+
+        console.log(formattedData);
+        await walletStorage.addAccount(formattedData);
       } catch (e) {
         console.error(e);
+        toast.error(`Error saving account data ${e}`);
       }
 
       //TODO: Similarly fetch init hash and deployer
@@ -47,16 +54,32 @@ export const useAccount = () => {
       return wallet;
     } catch (e) {
       console.error('Account error', e);
+      toast.error(`Error creating account ${e}`);
       return null;
     }
   };
 
-  const deployToken = async (owner: AccountWalletWithSecretKey) => {
+  const deployToken = async (owner: AccountWalletWithSecretKey, tokenName: string, tokenSymbol: string) => {
     const ownerAddress = owner.getAddress();
-    const deployedContract = await TokenContract.deploy(owner, ownerAddress, 'TokenName', 'TKN', 18).send().deployed();
-
-    const token = await TokenContract.at(deployedContract.address, owner);
-    return token;
+    const deployedContract = await TokenContract.deploy(owner, ownerAddress, tokenName, tokenSymbol, 18)
+      .send()
+      .deployed();
+    try {
+      const tokenContract = {
+        contractAddress: deployedContract.address.toString(),
+        name: tokenName,
+        symbol: tokenSymbol,
+        deployerAddress: ownerAddress.toString(),
+      };
+      await walletStorage.addTokenContract(tokenContract);
+      setTokenContracts([tokenContract, ...tokenContracts]);
+      toast.success(`Token ${tokenContract.name} deployed successfully`);
+      return tokenContract;
+    } catch (err) {
+      console.error('Failed to save token contract address', err);
+      toast.error(`Error in deploying token ${err}`);
+      return null;
+    }
   };
 
   return { createAccount, deployToken };

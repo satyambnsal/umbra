@@ -1,5 +1,5 @@
+import { SettingsPageLayout } from '@src/components/settings-page-layout.js';
 import { EyeIcon } from 'lucide-react';
-import { SettingsPageLayout } from '@src/components/settings-page-layout';
 
 const ButtonWrapperStyles = 'flex items-center justify-between p-6 rounded-xl bg-secondary';
 

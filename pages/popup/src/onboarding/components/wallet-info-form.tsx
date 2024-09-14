@@ -23,7 +23,7 @@ export const WalletInfoForm = ({ title, onSubmit, isProgress }: WalletInfoFormPr
               onSubmit(alias);
             }}
             data-testid="formSubmit"
-            disabled={isProgress}>
+            disabled={isProgress || !alias.length}>
             <span>Next</span>
 
             {isProgress ? <Loader2Icon className="animate-spin" size={16} /> : ''}

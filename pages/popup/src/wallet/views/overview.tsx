@@ -3,17 +3,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MenuBar } from '../../components/menu-bar.js';
 import { ArrowRightIcon, Loader2Icon } from 'lucide-react';
 import { TxTile } from '../../components/tx-tile.js';
+import { currentTokenContractAtom, isPrivateAtom, privateBalanceAtom, publicBalanceAtom } from '@src/atoms.js';
+import { useAtomValue } from 'jotai';
+import { useBalance } from '@src/hooks/useBalance.js';
 
 type OverviewViewProps = {
   publicAddress: string;
   transactions: any;
-  isProgress: boolean;
-  handleDeployToken: () => void;
 };
 
-export const OverviewView = ({ transactions, publicAddress, isProgress, handleDeployToken }: OverviewViewProps) => {
+export const OverviewView = ({ transactions, publicAddress }: OverviewViewProps) => {
   const navigate = useNavigate();
-  console.log('PUBLIC ADDRESS IN OVERVIEW', publicAddress);
+  const currentTokenContract = useAtomValue(currentTokenContractAtom);
+  const isPrivate = useAtomValue(isPrivateAtom);
+  const { fetchBalance } = useBalance();
+  const publicBalance = useAtomValue(publicBalanceAtom);
+  const privateBalance = useAtomValue(privateBalanceAtom);
+
+  console.log('overview', { publicBalance, privateBalance });
 
   return (
     <div className="flex flex-col flex-1 bg-[#1a2b3c] max-w-[400px] mx-auto">
@@ -22,17 +29,17 @@ export const OverviewView = ({ transactions, publicAddress, isProgress, handleDe
         <div className="card flex-col bg-secondary rounded-t-none px-8 pb-6 gap-12 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-primary text-base font-semibold">Portfolio value</h1>
-            <button type="button" className="btn btn-sm btn-primary" onClick={handleDeployToken}>
-              Deploy token
-              {isProgress && <Loader2Icon className="animate-spin" size={16} />}
-            </button>
           </div>
           <h2 className="flex items-end">
             <span className="flex items-center text-4xl">
-              <span className="mr-1">ETH</span>
-              20.78
+              <span className="mr-1">{currentTokenContract ? currentTokenContract.symbol : '--'}</span>
+              {isPrivate ? privateBalance.toString() : publicBalance.toString()}
             </span>
           </h2>
+          <button onClick={fetchBalance}>
+            {' '}
+            <Loader2Icon />
+          </button>
           <div className="flex gap-4">
             <button
               type="button"

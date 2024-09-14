@@ -1,16 +1,25 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReceiveView } from '../views/receive.js';
-// import { useAccount } from "../../hooks/useAccounts.js";
+import { currentWalletAtom } from '@src/atoms.js';
+import { useAtomValue } from 'jotai';
+import { toast } from 'sonner';
 
 export const ReceiveRoute = () => {
   const navigate = useNavigate();
-  // const { copyWalletAddress } = useAccount();
+  const currentWallet = useAtomValue(currentWalletAtom);
+  const publicAddress = currentWallet ? currentWallet.account.getAddress().toString() : 'No Account found';
+  const walletName = currentWallet ? currentWallet.alias : '';
+
+  const copyWalletAddress = async () => {
+    await navigator.clipboard.writeText(publicAddress ?? '');
+    toast.success(`Address ${publicAddress} copied`);
+  };
+
   return (
     <ReceiveView
-      publicKey={'987rkljcvsd8u90s9vuds'}
-      walletName={'yash-aztec'}
-      // onCopyWalletAddress={copyWalletAddress}
+      publicKey={publicAddress}
+      walletName={walletName}
+      onCopyWalletAddress={copyWalletAddress}
       onGoBack={() => navigate(-1)}
     />
   );

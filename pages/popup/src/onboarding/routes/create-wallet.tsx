@@ -29,7 +29,7 @@ export const CreateWalletRoute = () => {
       setCurrentWallet({ alias, account: newAccount });
     }
     setIsProgress(false);
-    //  toast(<>Account {newAccount?.getAddress()}create successfully</>);
+    toast(<>Account {newAccount?.getAddress().toString()} create successfully</>);
     navigate('/dashboard');
   };
 

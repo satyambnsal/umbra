@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { SettingsView } from '../views/settings';
+import { SettingsView } from '../views/settings.js';
 
 export const SettingsRoute = () => {
   const navigate = useNavigate();

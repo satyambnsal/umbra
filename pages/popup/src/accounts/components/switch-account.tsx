@@ -1,53 +1,32 @@
-import React, { useState } from 'react';
-import { truncateString } from '../../common/lib/string.js';
-import type { AccountsArray } from '../routes/accounts.js';
-
-const ACCOUNTS: AccountsArray = [
-  {
-    name: 'yash-aztec',
-    publicKey: 'B62qk1KqJq2m59NJuPmHHWDFsejzc21Hr8gcHqWYfhM51dwpsVxtEQS',
-    balance: 12,
-    key: '0',
-  },
-  {
-    name: 'yash-aztec',
-    publicKey: 'B62qk1KqJq2m59NJuPmHHWDFsejzc21Hr8gcHqWYfhM51dwpsVxtEQS',
-    balance: 12,
-    key: '1',
-  },
-];
+import { useAtom, useAtomValue } from 'jotai';
+import { accountsAtom, currentWalletAtom } from '@src/atoms.js';
 
 export const SwitchAccounts = () => {
-  const [selectedAccount, setSelectedAccount] = useState(ACCOUNTS[0]);
+  const [currentWallet, setCurrentWallet] = useAtom(currentWalletAtom);
+  const accounts = useAtomValue(accountsAtom);
   return (
     <div className="flex flex-col flex-1 gap-4">
       <div className="flex flex-col">
         <h1 className="text-3xl mb-4">Switch Accounts</h1>
 
         <div className="flex flex-col gap-2">
-          {ACCOUNTS.map(account => {
+          {accounts.map(account => {
+            const isCurrentAccount =
+              currentWallet?.account.getAddress().toShortString() === account.account.getAddress().toShortString();
             return (
               <button
-                className={`card p-3 ${
-                  selectedAccount.key === account.key ? 'bg-primary text-secondary' : 'bg-secondary text-white'
-                }`}
+                className={`card p-3 ${isCurrentAccount ? 'bg-primary text-secondary' : 'bg-secondary text-white'}`}
                 onClick={() => {
-                  setSelectedAccount(ACCOUNTS[Number(account.key)]);
+                  setCurrentWallet(account);
                 }}
-                key={account.key}>
-                <p className="leading-none">Account-1</p>
+                key={account.account.getAddress().toShortString()}>
+                <p className="leading-none capitalize">{account.alias}</p>
                 <p
-                  className={`text-xs max-w-[200px] ${
-                    selectedAccount.key === account.key ? 'text-secondary/70' : 'text-white/70'
+                  className={`text-xs max-w-[200px] break-all ${
+                    isCurrentAccount ? 'text-secondary/70' : 'text-white/70'
                   }`}>
-                  {truncateString({
-                    value: 'B62qk1KqJq2m59NJuPmHHWDFsejzc21Hr8gcHqWYfhM51dwpsVxtEQS' ?? '',
-                    firstCharCount: 12,
-                    endCharCount: 12,
-                  })}
+                  {account.account.getAddress().toString()}
                 </p>
-
-                <p className="mt-2">{account.balance} ETH</p>
               </button>
             );
           })}

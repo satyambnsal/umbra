@@ -1,5 +1,5 @@
-import { SettingsPageLayout } from '@src/components/settings-page-layout';
-import { Info, KeySquare, Shield } from 'lucide-react';
+import { SettingsPageLayout } from '@src/components/settings-page-layout.js';
+import { DollarSign, Info, KeySquare, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Links = [
@@ -20,6 +20,12 @@ const Links = [
     description: 'Everything about us',
     href: '/settings/about',
     Icon: Info,
+  },
+  {
+    label: 'Faucets',
+    description: 'Mint Faucets',
+    href: '/settings/faucet',
+    Icon: DollarSign,
   },
 ];
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import Logo from '../../common/assets/logo.svg?react';
 import Plus from '../../common/assets/plus.svg?react';
-// import Restore from "../../common/assets/restore.svg?react";
 import clsx from 'clsx';
 import { WizardLayout } from '../../components/wizard-layout.js';
 
@@ -53,21 +52,6 @@ export const StartView = ({ onCreateClicked }: StartViewProps) => (
           onClick={onCreateClicked}
           testId="onboarding/createWalletButton"
         />
-        {/* <OptionCard
-          title="Add existing wallet"
-          description="With a seed phrase"
-          icon={<Restore />}
-          onClick={onRestoreClicked}
-          testId="onboarding/restoreWalletButton"
-        /> */}
-        {/* <OptionCard
-          title="Hardware wallet"
-          description="Connect your device"
-          icon={<HardwareIcon />}
-          onClick={() => console.log("Hardware Wallet")}
-          testId="onboarding/hardwareWalletButton"
-          disabled
-        /> */}
       </div>
     </div>
   </WizardLayout>

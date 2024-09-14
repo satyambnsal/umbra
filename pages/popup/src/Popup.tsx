@@ -41,7 +41,7 @@ const Popup = () => {
   console.log('pxe client 44', pxeClient);
   return (
     <>
-      <LoadingScreen isLoading={false}>
+      <LoadingScreen isLoading={isLoading}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {isLoading && <p>is loading</p>}
           {errorMessage && (
@@ -50,7 +50,7 @@ const Popup = () => {
               <button onClick={handlePXEConnection}>Try Reconnect</button>
             </div>
           )}
-          <Router />
+          {!isLoading && <Router />}
         </ThemeProvider>
       </LoadingScreen>
     </>

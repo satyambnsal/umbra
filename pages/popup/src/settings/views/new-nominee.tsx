@@ -1,5 +1,5 @@
+import { MenuBar } from '@src/components/menu-bar.js';
 import clsx from 'clsx';
-import { MenuBar } from '@src/components/menu-bar';
 
 type NewNomineeViewProps = {
   onGoBack: () => void;

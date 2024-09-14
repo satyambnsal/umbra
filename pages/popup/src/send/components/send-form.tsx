@@ -1,9 +1,16 @@
-import React from 'react';
+import { useState } from 'react';
 import AztecIcon from '../../common/assets/aztec.svg?react';
 
-export const SendForm = () => {
+type SendFormProps = {
+  sendToken: (receiverAddress: string, amount: string) => void;
+  isProgress: boolean;
+};
+
+export const SendForm = ({ sendToken, isProgress }: SendFormProps) => {
+  const [receiverAddress, setReceiverAddress] = useState<string>('');
+  const [amount, setAmount] = useState('');
   return (
-    <form
+    <div
       className="flex flex-col gap-1 flex-1 pb-8 items-center"
       // onSubmit={handleSubmit(onSubmit)}
     >
@@ -34,16 +41,35 @@ export const SendForm = () => {
           className="grow"
           placeholder="Address"
           data-testid="send/to"
+          onChange={e => {
+            setReceiverAddress(e.target.value);
+          }}
           // {...register("to")}
         />
       </label>
       <label className="input flex items-center gap-2 py-7 w-full">
-        <input id="amount" type="text" className="grow" placeholder="Amount" data-testid="send/amount" />
+        <input
+          id="amount"
+          type="text"
+          className="grow"
+          placeholder="Amount"
+          data-testid="send/amount"
+          onChange={e => {
+            setAmount(e.target.value);
+          }}
+        />
       </label>
 
-      <button type="submit" className="btn btn-primary max-w-48 w-full mt-auto" data-testid="formSubmit">
-        Next
+      <button
+        type="button"
+        disabled={!amount || !receiverAddress}
+        className="btn btn-primary max-w-48 w-full mt-auto"
+        data-testid="formSubmit"
+        onClick={() => {
+          sendToken(receiverAddress, amount);
+        }}>
+        Send
       </button>
-    </form>
+    </div>
   );
 };

@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { truncateString } from '../common/lib/string.js';
 import { MenuDrawer } from './menu-drawer.js';
 import Logo from './../common/assets/logoSM.svg?react';
+import { useAtom } from 'jotai';
+import { isPrivateAtom } from '@src/atoms.js';
 
 type MenuBarBaseProps = {
   leftSlot?: React.ReactNode;
@@ -51,7 +53,7 @@ export const MenuBar = ({
 }: MenuBarProps) => {
   const navigate = useNavigate();
   const goHome = () => navigate('/dashboard');
-  const [isPrivate, setIsPrivate] = useState(false);
+  const [isPrivate, setIsPrivate] = useAtom(isPrivateAtom);
   switch (variant) {
     case 'dashboard':
       return (

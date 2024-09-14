@@ -1,4 +1,3 @@
-import React from 'react';
 import clsx from 'clsx';
 import { CopyIcon, ExternalLinkIcon } from 'lucide-react';
 import { toast } from 'sonner';

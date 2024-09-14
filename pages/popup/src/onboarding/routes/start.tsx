@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react';
 import { StartView } from '../views/start.js';
 import { useNavigate } from 'react-router-dom';
-import { useStorage } from '@extension/shared';
-import { walletStorage } from '@extension/storage';
+import { useAtomValue } from 'jotai';
+import { accountsAtom } from '@src/atoms.js';
 
 export const StartRoute = () => {
   const navigate = useNavigate();
-  // const walletData = useStorage(walletStorage);
+  const accounts = useAtomValue(accountsAtom);
 
-  // useEffect(() => {
-  //   const initialRedirect = async () => {
-  //     if (walletData.accounts.length > 0) {
-  //       return navigate('/dashboard');
-  //     }
-  //   };
-  //   initialRedirect();
-  // }, []);
+  useEffect(() => {
+    if (accounts.length > 0) {
+      return navigate('/dashboard');
+    }
+  }, [accounts]);
 
   return <StartView onCreateClicked={() => navigate('/onboarding/create')} />;
 };
