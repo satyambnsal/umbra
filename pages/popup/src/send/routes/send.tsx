@@ -1,11 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import { SendView } from '../views/send.js';
-import { useAtomValue } from 'jotai';
-import { currentTokenContractAtom, currentWalletAtom } from '@src/atoms.js';
+import { useAtom, useAtomValue } from 'jotai';
+import {
+  currentTokenContractAtom,
+  currentWalletAtom,
+  PayTransactionFull,
+  payTransactionsAtom,
+  TransactionStatus,
+} from '@src/atoms.js';
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { AztecAddress, Fr } from '@aztec/circuits.js';
 import { TokenContract as TokenContractAztec } from '@aztec/noir-contracts.js';
+import { transactionStorage } from '@extension/storage';
+import { PayTransaction } from '@extension/storage/lib/types.js';
 
 export type SendTokenParams = { receiverAddress: string; amount: number; isPrivate: boolean };
 export type sendTokenFnType = ({ receiverAddress, amount, isPrivate }: SendTokenParams) => void;
@@ -15,6 +23,7 @@ export const SendRoute = () => {
   const currentWallet = useAtomValue(currentWalletAtom);
   const [isProgress, setIsProgress] = useState(false);
   const currentTokenContract = useAtomValue(currentTokenContractAtom);
+  const [payTransactions, setPayTransactions] = useAtom(payTransactionsAtom);
 
   const sendToken = async ({ receiverAddress, amount, isPrivate }: SendTokenParams) => {
     try {
@@ -39,9 +48,35 @@ export const SendRoute = () => {
           .send();
       }
 
-      console.log(`Sent mint transaction ${await tx.getTxHash()}`);
-      const receipt1 = await tx.wait();
-      console.log(`Transaction has been mined on block ${receipt1.blockNumber}`);
+      const transactionHash = await tx.getTxHash();
+      console.log(`Sent mint transaction ${transactionHash}`);
+      const txStoragePayload: PayTransaction = {
+        from: currentWallet.account.getAddress().toString(),
+        to: receiverAddress,
+        type: isPrivate ? 'private' : 'public',
+        dateTime: new Date().toLocaleString(),
+        amount: amount,
+        txHash: transactionHash.toString(),
+        tokenContractAddress: currentTokenContract.contractAddress,
+        currencySymbol: currentTokenContract.symbol,
+      };
+      console.log('storage payload', txStoragePayload);
+      await transactionStorage.addPayTransaction(txStoragePayload);
+      console.log(' Added to wallet storage');
+      const receipt = (await tx.getReceipt()).toJSON();
+
+      const txFullPayload: PayTransactionFull = {
+        ...txStoragePayload,
+        status: receipt.status as TransactionStatus,
+        transactionFee: receipt.transactionFee,
+        blockHash: receipt.blockHash,
+        blockNumber: receipt.blockNumber,
+        error: receipt.error,
+      };
+      const updatedTxns = [txFullPayload, ...payTransactions];
+      console.log('updated tns', updatedTxns);
+      setPayTransactions(updatedTxns);
+      console.log(`Transaction has been mined on block ${receipt.blockNumber}`);
       return true;
     } catch (e: any) {
       toast.error(e.toString());

@@ -3,14 +3,12 @@ import IncomingIcon from './../common/assets/incoming.svg?react';
 import OutgoingIcon from './../common/assets/outgoing.svg?react';
 import StakedIcon from './../common/assets/staked.svg?react';
 
-export const TxIcon = ({ currentWalletAddress }: { currentWalletAddress: string }) => {
-  // TODO: According to current wallet address and tx get if the transaction is  "delegation" , "incoming" or "outgoing"
-  const kind = false ? 'delegation' : 'incoming';
-  if (kind === 'delegation') {
-    return <StakedIcon />;
-  }
+export const TxIcon = ({ kind }: { kind: 'incoming' | 'outgoing' | 'other' }) => {
   if (kind === 'incoming') {
     return <IncomingIcon />;
   }
-  return <OutgoingIcon />;
+  if (kind === 'outgoing') {
+    return <OutgoingIcon />;
+  }
+  return <StakedIcon />;
 };

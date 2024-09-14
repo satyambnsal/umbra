@@ -23,11 +23,23 @@ export type AztecAccount = {
   alias: string;
   type: string;
 };
+
 export type TokenContract = {
   name: string;
   symbol: string;
   contractAddress: string;
   deployerAddress: string;
+};
+
+export type PayTransaction = {
+  from: string;
+  to: string;
+  amount: number;
+  type: string;
+  txHash: string;
+  dateTime: string;
+  tokenContractAddress: string;
+  currencySymbol: string;
 };
 
 export type Wallet = {
@@ -40,6 +52,10 @@ export type WalletStorage = BaseStorage<Wallet> & {
   setRpcURL: (newUrl: string) => Promise<void>;
   addAccount: (newAccount: AztecAccount) => Promise<void>;
   addTokenContract: (tokenContract: TokenContract) => Promise<void>;
+};
+
+export type TransactionStorage = BaseStorage<PayTransaction[]> & {
+  addPayTransaction: (transaction: PayTransaction) => Promise<void>;
 };
 
 export type StorageConfig<D = string> = {

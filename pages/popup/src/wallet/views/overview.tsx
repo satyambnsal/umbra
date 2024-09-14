@@ -3,23 +3,28 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MenuBar } from '../../components/menu-bar.js';
 import { ArrowRightIcon, RefreshCw } from 'lucide-react';
 import { TxTile } from '../../components/tx-tile.js';
-import { currentTokenContractAtom, isPrivateAtom, privateBalanceAtom, publicBalanceAtom } from '@src/atoms.js';
+import {
+  currentTokenContractAtom,
+  isPrivateAtom,
+  payTransactionsAtom,
+  privateBalanceAtom,
+  publicBalanceAtom,
+} from '@src/atoms.js';
 import { useAtomValue } from 'jotai';
 import { useBalance } from '@src/hooks/useBalance.js';
-import { useState } from 'react';
 
 type OverviewViewProps = {
   publicAddress: string;
-  transactions: any;
 };
 
-export const OverviewView = ({ transactions, publicAddress }: OverviewViewProps) => {
+export const OverviewView = ({ publicAddress }: OverviewViewProps) => {
   const navigate = useNavigate();
   const currentTokenContract = useAtomValue(currentTokenContractAtom);
   const isPrivate = useAtomValue(isPrivateAtom);
   const { fetchBalance, isFetching } = useBalance();
   const publicBalance = useAtomValue(publicBalanceAtom);
   const privateBalance = useAtomValue(privateBalanceAtom);
+  const payTransactions = useAtomValue(payTransactionsAtom);
   // const [isFetchingOnButton, setIsFetchingOnButton] = useState(false)
 
   console.log('overview', { publicBalance, privateBalance });
@@ -79,8 +84,8 @@ export const OverviewView = ({ transactions, publicAddress }: OverviewViewProps)
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {transactions.length > 0 ? (
-              transactions.map(tx => <TxTile key={tx.hash} tx={tx} currentWalletAddress={publicAddress} />)
+            {payTransactions.length > 0 ? (
+              payTransactions.map(tx => <TxTile key={tx.txHash} tx={tx} currentWalletAddress={publicAddress} />)
             ) : (
               <p className="col-span-2">No transactions yet.</p>
             )}
