@@ -7,7 +7,7 @@
 <!-- markdownlint-restore -->
 
 ⚠️ Work in progress ⚠️
-🚨 Now in Beta 🚨
+🚨 Now in experimental phase 🚨
 
 </div>
 
