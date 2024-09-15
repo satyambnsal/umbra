@@ -178,12 +178,18 @@ export const FaucetView = ({ onCloseClicked }: keysViewProps) => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <button className="btn btn-primary w-full" onClick={handleMintPublic} disabled={!isTokenAvailable}>
+            <button
+              className="btn btn-primary w-full"
+              onClick={handleMintPublic}
+              disabled={!isTokenAvailable || isMintPublicProgress}>
               Mint 100 public token
               {isMintPublicProgress && <Loader2Icon className="animate-spin" size={16} />}
             </button>
 
-            <button className="btn btn-primary w-full" onClick={handleMintPrivate} disabled={!isTokenAvailable}>
+            <button
+              className="btn btn-primary w-full"
+              onClick={handleMintPrivate}
+              disabled={!isTokenAvailable || isMintPrivateProgress}>
               Mint 100 private token
               {isMintPrivateProgress && <Loader2Icon className="animate-spin" size={16} />}
             </button>

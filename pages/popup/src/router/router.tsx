@@ -20,12 +20,13 @@ import { NotFoundRoute } from '@src/not-found/routes/not-found.js';
 import { useEffect } from 'react';
 import { useStorage } from '@extension/shared';
 import { walletStorage } from '@extension/storage';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { currentTokenContractAtom, pxeAtom, tokenContractsAtom } from '@src/atoms.js';
+import { useSetAtom } from 'jotai';
+import { currentTokenContractAtom, tokenContractsAtom } from '@src/atoms.js';
 import { FaucetRoute } from '@src/settings/routes/faucet.js';
 import { useLoadAccountFromStorage } from '@src/hooks/useLoadAccountsFromStorage.js';
 import { useBalance } from '@src/hooks/useBalance.js';
 import { TokensRoute } from '@src/settings/routes/tokens.js';
+import { useLoadTransactions } from '@src/hooks/useLoadTransactions.js';
 
 export const Router = () => {
   const walletData = useStorage(walletStorage);
@@ -33,6 +34,7 @@ export const Router = () => {
   const setCurrentTokenContract = useSetAtom(currentTokenContractAtom);
   useBalance();
   useLoadAccountFromStorage();
+  useLoadTransactions();
   useEffect(() => {
     const tokenContracts = walletData.tokenContracts;
     setTokenContracts(tokenContracts);

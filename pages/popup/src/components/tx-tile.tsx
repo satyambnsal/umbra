@@ -1,10 +1,7 @@
-// import { formatCompact } from "@/common/lib/numbers";
-// import { TxIcon } from "@/components/tx-icon";
 import { Link } from 'react-router-dom';
 import { TxIcon } from './tx-icon.js';
 import { formatCompact } from '../common/lib/numbers.js';
-import { PayTransactionFull } from '@src/atoms.js';
-// import { formatCompact } from "../lib/numbers.js";
+import type { PayTransactionFull } from '@src/atoms.js';
 
 export const TxTile = ({ tx, currentWalletAddress }: { tx: PayTransactionFull; currentWalletAddress: string }) => {
   const formattedAmount = formatCompact({ value: tx.amount });

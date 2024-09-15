@@ -1,7 +1,7 @@
 import { ChevronRight, SquareArrowOutUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import packageJson from '../../../package.json';
-import { SettingsPageLayout } from '@src/components/settings-page-layout';
+import { SettingsPageLayout } from '@src/components/settings-page-layout.js';
 
 const ButtonWrapperStyles = 'flex items-center justify-between p-6 rounded-xl bg-secondary';
 

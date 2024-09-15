@@ -1,19 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { SendView } from '../views/send.js';
 import { useAtom, useAtomValue } from 'jotai';
-import {
-  currentTokenContractAtom,
-  currentWalletAtom,
-  PayTransactionFull,
-  payTransactionsAtom,
-  TransactionStatus,
-} from '@src/atoms.js';
+import type { PayTransactionFull, TransactionStatus } from '@src/atoms.js';
+import { currentTokenContractAtom, currentWalletAtom, payTransactionsAtom } from '@src/atoms.js';
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { AztecAddress, Fr } from '@aztec/circuits.js';
 import { TokenContract as TokenContractAztec } from '@aztec/noir-contracts.js';
 import { transactionStorage } from '@extension/storage';
-import { PayTransaction } from '@extension/storage/lib/types.js';
+import type { PayTransaction } from '@extension/storage/lib/types.js';
 
 export type SendTokenParams = { receiverAddress: string; amount: number; isPrivate: boolean };
 export type sendTokenFnType = ({ receiverAddress, amount, isPrivate }: SendTokenParams) => void;
@@ -77,6 +72,7 @@ export const SendRoute = () => {
       console.log('updated tns', updatedTxns);
       setPayTransactions(updatedTxns);
       console.log(`Transaction has been mined on block ${receipt.blockNumber}`);
+      toast.success(`${amount} token send successfully to ${receiverAddress}`);
       return true;
     } catch (e: any) {
       toast.error(e.toString());

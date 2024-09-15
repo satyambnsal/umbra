@@ -3,7 +3,7 @@ import AztecIcon from '../../common/assets/aztec.svg?react';
 import { useAtomValue } from 'jotai';
 import { currentTokenContractAtom, isPrivateAtom, privateBalanceAtom, publicBalanceAtom } from '@src/atoms.js';
 import { toast } from 'sonner';
-import { sendTokenFnType } from '../routes/send.js';
+import type { sendTokenFnType } from '../routes/send.js';
 import { Loader2Icon } from 'lucide-react';
 
 type SendFormProps = {
@@ -85,7 +85,7 @@ export const SendForm = ({ sendToken, isProgress }: SendFormProps) => {
 
       <button
         type="button"
-        disabled={!amount || !receiverAddress || !currentTokenContract}
+        disabled={!amount || !receiverAddress || !currentTokenContract || isProgress}
         className="btn btn-primary max-w-48 w-full mt-auto"
         data-testid="formSubmit"
         onClick={handleSendToken}>

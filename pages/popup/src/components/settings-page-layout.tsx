@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { MenuBar } from './menu-bar';
+import { MenuBar } from './menu-bar.js';
 
 type SettingsPageHeaderProps = {
   title: string;
