@@ -3,12 +3,32 @@ import { MenuBar } from '../../components/menu-bar.js';
 import { FromTo } from '../../components/from-to.js';
 import dayjs from 'dayjs';
 import { HashDropdown } from '../../components/hash-dropdown.js';
+import { PayTransactionFull } from '@src/atoms.js';
 type TransactionDetailsViewProps = {
   onGoBack: () => void;
-  hash: string | undefined;
+  tx: PayTransactionFull | undefined;
+  hash: string;
 };
 
-export const TransactionDetailsView = ({ onGoBack, hash }: TransactionDetailsViewProps) => {
+export const TransactionDetailsView = ({ onGoBack, tx, hash }: TransactionDetailsViewProps) => {
+  if (!tx) {
+    return <h3>No Transaction found for hash {hash}</h3>;
+  }
+  const {
+    from,
+    to,
+    amount,
+    currencySymbol,
+    txHash,
+    dateTime,
+    status,
+    tokenContractAddress,
+    type,
+    transactionFee,
+    blockHash,
+    blockNumber,
+  } = tx;
+
   return (
     <div className="flex flex-col flex-1 bg-[#1a2b3c]" data-testid="appLayout">
       <MenuBar variant="back" onBackClicked={onGoBack} />
@@ -31,7 +51,7 @@ export const TransactionDetailsView = ({ onGoBack, hash }: TransactionDetailsVie
             </div>
             <div className="flex items-center justify-between">
               <p className="text-[#7D7A9C]">Date and time</p>
-              <p className="text-right">{dayjs('2023-09-07T15:30:45Z' ?? '').format('DD/MM/YY - HH:mm')}</p>
+              <p className="text-right">{dayjs().format('DD/MM/YY - HH:mm')}</p>
             </div>
             <hr className="border-[#413E5E]" />
             <div className="flex items-center justify-between">
