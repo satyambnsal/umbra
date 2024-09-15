@@ -24,7 +24,7 @@ export const HashDropdown = ({ hash, className }: HashDropdownProps) => {
   };
   return (
     <div className={clsx('dropdown dropdown-top dropdown-end')}>
-      <div role="button" tabIndex={0} className={clsx('cursor-pointer', className)}>
+      <div role="button" tabIndex={0} className={clsx('cursor-pointer break-all', className)}>
         {hash}
       </div>
       <ul className="p-2 shadow menu dropdown-content border-2 border-secondary z-[1] bg-neutral rounded-box w-52">
@@ -35,7 +35,12 @@ export const HashDropdown = ({ hash, className }: HashDropdownProps) => {
           </button>
         </li>
         <li onClick={handleClick}>
-          <button type="button" onClick={openInExplorer} className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              console.log('OPEN IN BROWSER CLICKED');
+            }}
+            className="flex gap-2">
             <ExternalLinkIcon />
             <span>Open in browser</span>
           </button>

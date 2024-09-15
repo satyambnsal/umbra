@@ -64,7 +64,7 @@ export const SettingsView = ({ onCloseClicked, onLogOut }: SettingsViewProps) =>
               );
             })}
           </div>
-          <button type="button" className="px-10 btn" data-testid="settings/logOut" onClick={onLogOut}>
+          <button type="button" className="px-10 btn" data-testid="settings/logOut" onClick={onLogOut} disabled>
             Log out
           </button>
         </div>

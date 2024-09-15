@@ -14,7 +14,7 @@ export const NewNomineeView = ({ onGoBack }: NewNomineeViewProps) => {
         <h2 className="ml-8 mt-1 text-3xl">New Nominee</h2>
       </div>
       <div className="pt-6 pb-8 px-8 flex flex-col flex-1">
-        <form className="flex flex-col flex-1 items-center">
+        <div className="flex flex-col flex-1 items-center">
           <div className="w-full space-y-2">
             <div className="space-y-0.5">
               <input
@@ -39,13 +39,13 @@ export const NewNomineeView = ({ onGoBack }: NewNomineeViewProps) => {
             </div>
           </div>
           <button
-            type="submit"
+            type="button"
             className="mt-auto px-12 btn btn-primary"
             // disabled={disableSubmit}
             data-testid="submitForm">
-            Add contact
+            Add Nominee
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

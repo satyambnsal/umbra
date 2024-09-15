@@ -25,9 +25,6 @@ export const OverviewView = ({ publicAddress }: OverviewViewProps) => {
   const publicBalance = useAtomValue(publicBalanceAtom);
   const privateBalance = useAtomValue(privateBalanceAtom);
   const payTransactions = useAtomValue(payTransactionsAtom);
-  // const [isFetchingOnButton, setIsFetchingOnButton] = useState(false)
-
-  console.log('overview', { publicBalance, privateBalance });
 
   return (
     <div className="flex flex-col flex-1 bg-[#1a2b3c] max-w-[400px] mx-auto">

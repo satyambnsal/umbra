@@ -47,7 +47,7 @@ export const MenuDrawer = () => {
             </div>
           </div>
           <div className="flex flex-col items-start gap-4 text-3xl text-left">
-            <button type="button" onClick={() => navigate('/dashboard')}>
+            <button type="button" onClick={() => navigate('/')}>
               Dashboard
             </button>
 
@@ -61,10 +61,6 @@ export const MenuDrawer = () => {
 
             <button type="button" onClick={() => navigate('/settings')}>
               Settings
-            </button>
-
-            <button type="button" onClick={() => navigate('/')}>
-              Log out
             </button>
           </div>
         </div>
