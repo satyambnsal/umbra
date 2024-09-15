@@ -47,8 +47,8 @@ export const SendForm = ({ sendToken, isProgress }: SendFormProps) => {
             <AztecIcon width={24} height={24} />
           </div>
           <div className="flex flex-col">
-            <div>{currentTokenContract?.name ?? '--'}</div>
-            <div className="text-[#7D7A9C]">{currentTokenContract?.symbol ?? '--'}</div>
+            <div>{currentTokenContract?.name ?? 'NA'}</div>
+            <div className="text-[#7D7A9C]">{currentTokenContract?.symbol ?? 'NA'}</div>
           </div>
         </div>
         <div className="flex items-center">

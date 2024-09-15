@@ -155,7 +155,7 @@ export const FaucetView = ({ onCloseClicked }: keysViewProps) => {
               type="button"
               className="btn btn-primary"
               onClick={() => handleDeployToken({ tokenName, tokenSymbol })}
-              disabled={tokenName.length === 0 || tokenSymbol.length === 0}>
+              disabled={tokenName.length === 0 || tokenSymbol.length === 0 || isDeployProgress}>
               Deploy token
               {isDeployProgress && <Loader2Icon className="animate-spin" size={16} />}
             </button>

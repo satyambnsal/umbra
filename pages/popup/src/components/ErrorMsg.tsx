@@ -21,7 +21,7 @@ export const ErrorMessage = ({ errorMessage, handlePXEConnection }: ErrorMessage
             setRpcUrlInput(e.target.value);
           }}
         />
-        <div>
+        <div className="flex flex-col gap-3">
           <button
             onClick={() => {
               setRpcUrlFn(rpcUrlInput);

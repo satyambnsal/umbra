@@ -86,7 +86,7 @@ export const SendRoute = () => {
     <SendView
       onGoBack={() => navigate(-1)}
       balance={12}
-      currentNetwork={'mainnet'}
+      currentNetwork={'sandbox'}
       sendToken={sendToken}
       isProgress={isProgress}
     />

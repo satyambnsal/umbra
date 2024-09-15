@@ -41,7 +41,7 @@ export const OverviewView = ({ publicAddress }: OverviewViewProps) => {
 
           <h2 className="flex items-end">
             <span className="flex items-center text-4xl">
-              <span className="mr-1">{currentTokenContract ? currentTokenContract.symbol : '--'}</span>
+              <span className="mr-1">{currentTokenContract ? currentTokenContract.symbol : 'NA'}</span>
               {isPrivate ? privateBalance.toString() : publicBalance.toString()}
             </span>
           </h2>

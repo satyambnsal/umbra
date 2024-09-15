@@ -1,6 +1,6 @@
 import AztecIcon from '../../common/assets/aztec.svg?react';
 import { MenuBar } from '../../components/menu-bar.js';
-import { Edit } from 'lucide-react';
+import { Edit, XIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useRPC } from '@src/hooks/useRPC.js';
 
@@ -11,6 +11,7 @@ const NETWORKS = [
     blockchain: 'Aztec',
     network: 'Sandbox',
     disabled: false,
+    editRpcUrl: true,
   },
   {
     icon: AztecIcon,
@@ -18,6 +19,7 @@ const NETWORKS = [
     blockchain: 'Aztec',
     network: 'Devnet',
     disabled: true,
+    editRpcUrl: false,
   },
 ];
 
@@ -50,49 +52,56 @@ export const NetworksView = ({ onCloseClicked }: NetworksViewProps) => {
               type="button"
               key={entry.value}
               disabled={entry.disabled}
-              className="card flex flex-row bg-secondary w-full py-2 px-4 justify-between items-center disabled:opacity-50 text-left"
+              className="card bg-secondary w-full py-2 px-4 disabled:opacity-50 text-left"
               onClick={() => console.log('NETWORK SWITCHED')}>
-              <div>
-                <div className="flex items-center gap-2">
-                  <div className="btn btn-circle">
-                    <entry.icon width={24} height={24} />
-                  </div>
-                  <div>
-                    <h2 className="text-lg">{entry.blockchain}</h2>
-                    <p className="text-sm text-white/60">{rpcUrl}</p>
+              <div className="flex items-start justify-between w-full">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <div className="btn btn-circle">
+                      <entry.icon width={24} height={24} />
+                    </div>
+                    <div>
+                      <h2 className="text-lg">{entry.blockchain}</h2>
+
+                      {entry.editRpcUrl && (
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm text-white/60">{rpcUrl}</p>
+
+                          <button
+                            onClick={() => {
+                              setShowRpcInput(!showRpcInput);
+                            }}>
+                            {showRpcInput ? <XIcon size={14} /> : <Edit size={14} />}
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-                {showRpcInput && (
-                  <div className="flex items-center gap-3">
-                    <input
-                      className="rounded-md px-2 py-1"
-                      value={rpcUrlInput}
-                      onChange={e => {
-                        setRpcUrlInput(e.target.value);
-                      }}
-                    />
-                    <button
-                      onClick={() => {
-                        setRpcUrlFn(rpcUrlInput);
-                      }}
-                      className="btn btn-primary btn-sm">
-                      Set
-                    </button>
-                  </div>
-                )}
+                <div>
+                  <h3 className="text-[#7D7A9C]">{entry.network}</h3>
+                </div>
               </div>
 
-              <div className="">
-                <h3 className="text-[#7D7A9C]">{entry.network}</h3>
-
-                <button
-                  onClick={() => {
-                    setShowRpcInput(!showRpcInput);
-                  }}>
-                  <Edit size={14} />
-                </button>
-              </div>
+              {showRpcInput && entry.editRpcUrl && (
+                <div className="flex items-center gap-3 mt-2">
+                  <input
+                    className="rounded-md px-2 py-1"
+                    value={rpcUrlInput}
+                    onChange={e => {
+                      setRpcUrlInput(e.target.value);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      setRpcUrlFn(rpcUrlInput);
+                    }}
+                    className="btn btn-primary btn-sm">
+                    Set
+                  </button>
+                </div>
+              )}
             </button>
           ))}
         </div>

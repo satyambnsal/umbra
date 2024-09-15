@@ -14,7 +14,7 @@ export const SettingsPageLayout = ({
   onCloseClicked,
   headerContent = null,
 }: SettingsPageHeaderProps) => {
-  const currentNetworkName = 'mainnet';
+  const currentNetworkName = 'sandbox';
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-col">

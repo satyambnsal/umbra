@@ -12,7 +12,7 @@ export const TxTile = ({ tx, currentWalletAddress }: TxTileProps) => {
   const { from, to, txHash, currencySymbol, amount, dateTime } = tx;
   const kind = from === currentWalletAddress ? 'outgoing' : to === currentWalletAddress ? 'incoming' : 'other';
   return (
-    <Link key={txHash} to={`/transactions/${txHash}`} className={clsx('flex justify-between')}>
+    <Link key={txHash} to={`/transactions/${txHash}`} className={clsx('flex justify-between py-2')}>
       <div className="flex space-x-4">
         <div className="w-12 h-12 flex items-center justify-center bg-base-100 rounded-full">
           <TxIcon kind={kind} />

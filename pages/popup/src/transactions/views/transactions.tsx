@@ -23,11 +23,9 @@ export const TransactionsView = () => {
   const payTransactions = useAtomValue(payTransactionsAtom);
 
   // const txsFiltered = payTransactions.filter(tx => {
-  //   const kind = tx.from === publicAddress ? 'outgoing' : tx.to === publicAddress ? 'incoming' : 'other';
-
   //   if (currentFilter === Filters.all) return true;
-  //   const side = getTxSide({ tx, currentWalletAddress: publicKey });
-  //   return side === (currentFilter === Filters.sent ? 'outgoing' : 'incoming');
+  //   const kind = tx.from === publicAddress ? 'outgoing' : tx.to === publicAddress ? 'incoming' : 'other';
+  //   return kind === (currentFilter === Filters.sent ? 'outgoing' : 'incoming');
   // });
 
   return (
@@ -62,16 +60,7 @@ export const TransactionsView = () => {
         </div>
       )}
       {payTransactions.length > 0 ? (
-        <div className="px-8 pb-8 mt-6 space-y-4 divide-y divide-secondary">
-          {/* {pendingHashes.length > 0 && (
-            <p data-testid="transactions/pendingTransactions">
-              There are pending transactions.{' '}
-              <button type="button" onClick={openPendingTransactions}>
-                Preview
-              </button>
-            </p>
-          )} */}
-
+        <div className="px-8 pb-8 mt-6 divide-y divide-secondary">
           {payTransactions.map(tx => (
             <TxTile key={tx.txHash} tx={tx} currentWalletAddress={publicAddress} />
           ))}

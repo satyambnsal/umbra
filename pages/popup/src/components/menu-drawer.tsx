@@ -34,7 +34,7 @@ export const MenuDrawer = () => {
                 <Link
                   to="/networks"
                   className="btn btn-primary min-h-10 h-10 bg-white hover:bg-white shadow-none border-none gap-2">
-                  Mainnet
+                  Sandbox
                   <ChevronDownIcon size={24} />
                 </Link>
               </div>

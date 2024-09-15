@@ -4,6 +4,7 @@ import { Copy, EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useAtomValue } from 'jotai';
 import { currentWalletAtom } from '@src/atoms.js';
 import { toast } from 'sonner';
+import { deriveSigningKey, Fr } from '@aztec/circuits.js';
 
 type KeysViewProps = {
   onCloseClicked: () => void;
@@ -16,7 +17,7 @@ export const KeysView = ({ onCloseClicked }: KeysViewProps) => {
   const [showSigineKey, setShowSigineKey] = useState(false);
 
   const privateKey = currentWallet?.account.getSecretKey().toString();
-  const signinKey = 'signin kEy';
+  const signinKey = deriveSigningKey(Fr.fromString(privateKey || ''));
 
   const togglePrivateKey = () => setShowPrivateKey(!showPrivateKey);
   const toggleSiginKey = () => setShowSigineKey(!showSigineKey);
@@ -56,11 +57,13 @@ export const KeysView = ({ onCloseClicked }: KeysViewProps) => {
               </button>
             </div>
             <div className="bg-[#1f2937] rounded-lg p-3 flex gap-3 items-center justify-between">
-              <p className="text-gray-300 font-mono break-all">{showSigineKey ? signinKey : '•••••••••••••••••••'}</p>
+              <p className="text-gray-300 font-mono break-all">
+                {showSigineKey ? signinKey.toString() : '•••••••••••••••••••'}
+              </p>
 
               <button
                 onClick={() => {
-                  copyToClipboard(signinKey, 'Signin Key');
+                  copyToClipboard(signinKey.toString(), 'Signin Key');
                 }}>
                 <Copy />
               </button>
