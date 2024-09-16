@@ -5,33 +5,59 @@
 <div align="center">
 <br />
 <!-- markdownlint-restore -->
-
 ⚠️ Work in progress ⚠️
 🚨 Now in experimental phase 🚨
-
 </div>
 
-Welcome to Umbra an experimental and progressive Aztec Protocol wallet!
+# Welcome to Umbra
+
+Umbra is an experimental and progressive Aztec Protocol wallet!
 
 In the vast and evolving world of Web3, a wallet is not just a tool; it's the gateway to a whole new universe. It's the first consumer application anyone encounters in a blockchain ecosystem, and it's pivotal in shaping the user experience. That's where Umbra steps in!
 
 Umbra is at the frontier, leading the way in innovation and user-centric design. We're not just building a wallet; we're crafting the cornerstone of zero-knowledge application interaction design. With Umbra, you're stepping into the future of privacy-focused blockchain interactions.
 
+## Demo Video
+
+See Umbra wallet in action! Check out our walkthrough video showcasing the features and functionality of the Umbra extension:
+
+[Umbra Wallet Demo Video](https://youtu.be/EtYsWHkD7t0)
+
 ## Getting Started 🚀
 
 ### Prerequisites 📌
 
-- [NVM](https://github.com/nvm-sh/nvm)
 - [pnpm](https://pnpm.io/installation)
+- [Docker](https://www.docker.com/get-started)
+- Aztec CLI (instructions below)
+
+### Aztec CLI and Sandbox Setup
+
+1. Install the Aztec CLI:
+
+   For macOS and Linux:
+   ```bash
+   bash -i <(curl -s https://install.aztec.network)
+   ```
+
+   For Windows:
+   - Install [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install)
+   - Open a WSL terminal
+   - Run the following command:
+     ```bash
+     bash -i <(curl -s https://install.aztec.network)
+     ```
+
+2. Ensure Docker is running on your system.
+
+3. Start the Aztec Sandbox:
+   ```shell
+   aztec start --sandbox
+   ```
+
+Note: You must have the Aztec Sandbox running locally for this project to work correctly.
 
 ### Installation 💻
-
-Make sure you're on the right Node.js version, and you have pnpm installed.
-
-```shell
-$ nvm use
-$ npm i -g pnpm
-```
 
 Install the dependencies:
 
@@ -55,11 +81,8 @@ After building the project, you'll find the extension files in the `dist` folder
    - Chrome: `chrome://extensions`
    - Firefox: `about:debugging#/runtime/this-firefox`
    - Edge: `edge://extensions`
-
 2. Enable "Developer mode" (usually a toggle in the top right corner).
-
 3. Click "Load unpacked" (Chrome/Edge) or "Load Temporary Add-on" (Firefox).
-
 4. Navigate to the `dist` folder in your project directory and select it.
 
 The Umbra extension should now be loaded and visible in your browser's toolbar.
@@ -71,15 +94,14 @@ $ pnpm run dev
 ```
 
 This command will watch for file changes and rebuild the extension. After making changes, you'll need to refresh the extension in your browser:
-
 - Chrome/Edge: Right-click the extension icon and select "Reload"
 - Firefox: Click the "Reload" button next to the extension on the `about:debugging#/runtime/this-firefox` page
 
 Remember to reload the extension after each change to see the updates in your browser.
+
 ## Contributors ✨
 
-Thanks goes to these wonderful people
-([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -92,8 +114,6 @@ Thanks goes to these wonderful people
     </tr>
   </tbody>
 </table>
-
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
