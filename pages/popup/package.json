@@ -21,7 +21,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@aztec/accounts": "0.51.0",
+    "@aztec/accounts": "0.55.1",
     "@aztec/aztec.js": "0.51.0",
     "@aztec/circuits.js": "0.51.0",
     "@aztec/kv-store": "^0.52.0",
