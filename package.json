@@ -1,11 +1,17 @@
 {
-  "name": "chrome-extension-boilerplate-react-vite",
+  "name": "umbra-wallet",
   "version": "0.1.0",
-  "description": "Umbra Wallet",
+  "description": "Umbra is a privacy-focused Aztec wallet that enables stealth payments.",
   "license": "MIT",
+  "author": {
+    "name": "Satyam Bansal",
+    "email": "satyambnsal@gmail.com",
+    "url": "https://github.com/satyambnsal"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/satyambnsal/extension-setup"
+    "url": "https://github.com/satyambnsal/umbra",
+    "website": "https://www.umbrawallet.xyz/"
   },
   "type": "module",
   "scripts": {
