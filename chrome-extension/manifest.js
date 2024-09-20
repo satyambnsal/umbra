@@ -27,7 +27,7 @@ const manifest = deepmerge(
     version: packageJson.version,
     description: 'Umbra Wallet an Aztec Protocol wallet',
     host_permissions: ['<all_urls>'],
-    permissions: ['storage', 'scripting', 'tabs', 'notifications'],
+    permissions: ['storage', 'scripting', 'tabs', 'notifications', 'activeTab', 'background'],
     options_page: 'options/index.html',
     background: {
       service_worker: 'background.iife.js',
@@ -47,6 +47,8 @@ const manifest = deepmerge(
       {
         matches: ['http://*/*', 'https://*/*', '<all_urls>'],
         js: ['content/index.iife.js'],
+        run_at: 'document_start',
+        all_frames: true,
       },
       {
         matches: ['http://*/*', 'https://*/*', '<all_urls>'],
@@ -65,6 +67,10 @@ const manifest = deepmerge(
       {
         resources: ['*.js', '*.css', '*.svg', 'icon-128.png', 'icon-34.png'],
         matches: ['*://*/*'],
+      },
+      {
+        resources: ['rpc.js'],
+        matches: ['https://*/*'],
       },
     ],
   },
