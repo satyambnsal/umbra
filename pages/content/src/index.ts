@@ -1,14 +1,4 @@
-import { toggleTheme } from '@src/toggleTheme';
-
 console.log('content script loaded');
-
-void toggleTheme();
-
-// document.addEventListener('click', event => {
-//   if(event && event.target.matches('#connet-wallet')) {
-
-//   }
-// })
 
 const site = window.location.hostname;
 

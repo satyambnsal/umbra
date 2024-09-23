@@ -2,7 +2,8 @@ import { createStorage } from './base';
 import { StorageEnum } from './enums';
 import type { AztecAccount, TokenContract, Wallet, WalletStorage } from './types';
 
-const DEFAULT_RPC_URL = 'http://localhost:8080';
+// const DEFAULT_RPC_URL = 'http://localhost:8080';
+const DEFAULT_RPC_URL = 'http://98.70.35.172:8080';
 
 const storage = createStorage<Wallet>(
   'wallet-storage-key',

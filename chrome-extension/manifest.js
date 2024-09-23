@@ -26,7 +26,6 @@ const manifest = deepmerge(
     name: 'Umbra Wallet',
     version: packageJson.version,
     description: 'Umbra Wallet an Aztec Protocol wallet',
-    host_permissions: ['<all_urls>'],
     permissions: ['storage', 'scripting', 'tabs', 'notifications', 'activeTab', 'background'],
     options_page: 'options/index.html',
     background: {
