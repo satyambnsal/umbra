@@ -27,6 +27,7 @@ import { useLoadAccountFromStorage } from '@src/hooks/useLoadAccountsFromStorage
 import { useBalance } from '@src/hooks/useBalance.js';
 import { TokensRoute } from '@src/settings/routes/tokens.js';
 import { useLoadTransactions } from '@src/hooks/useLoadTransactions.js';
+import { ImportAccountsRoute } from '@src/accounts/routes/import-account.js';
 
 export const Router = () => {
   const walletData = useStorage(walletStorage);
@@ -52,7 +53,10 @@ export const Router = () => {
             <Route path="/dashboard" element={<OverviewRoute />} />
             <Route path="/send" element={<SendRoute />} />
             <Route path="/receive" element={<ReceiveRoute />} />
-            <Route path="/accounts" element={<AccountsRoute />} />
+            <Route path="accounts" element={<Outlet />}>
+              <Route path="" element={<AccountsRoute />} />
+              <Route path="import" element={<ImportAccountsRoute />} />
+            </Route>
             <Route path="/networks" element={<NetworksRoute />} />
 
             <Route path="onboarding" element={<Outlet />}>

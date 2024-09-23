@@ -59,6 +59,48 @@ export const useAccount = () => {
     }
   };
 
+  const recoverAccount = async (alias: string, privateKey: string) => {
+    const type = 'schnorr';
+    try {
+      const secretKey = Fr.fromString(privateKey);
+      const signingPrivateKey = deriveSigningKey(secretKey);
+      const account = getSchnorrAccount(pxeClient!, secretKey, signingPrivateKey);
+      const recoveredWallet = await account.waitSetup();
+      const salt = recoveredWallet.salt;
+      const { address } = account.getCompleteAddress();
+      try {
+        const accountData = {
+          address,
+          secretKey,
+          salt,
+          alias,
+          type,
+        };
+        console.log(accountData);
+
+        const formattedData = {
+          address: address.toString(),
+          secretKey: secretKey.toString(),
+          salt: salt.toString(),
+          alias,
+          type,
+        };
+
+        console.log(formattedData);
+        await walletStorage.addAccount(formattedData);
+      } catch (e) {
+        console.error(e);
+        toast.error(`Error saving account data ${e}`);
+      }
+
+      return recoveredWallet;
+    } catch (e) {
+      console.error('Account error', e);
+      toast.error(`Error creating account ${e}`);
+      return null;
+    }
+  };
+
   const deployToken = async (owner: AccountWalletWithSecretKey, tokenName: string, tokenSymbol: string) => {
     const ownerAddress = owner.getAddress();
     const deployedContract = await TokenContract.deploy(owner, ownerAddress, tokenName, tokenSymbol, 18)
@@ -82,5 +124,5 @@ export const useAccount = () => {
     }
   };
 
-  return { createAccount, deployToken };
+  return { createAccount, deployToken, recoverAccount };
 };

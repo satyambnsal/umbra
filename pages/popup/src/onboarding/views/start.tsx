@@ -3,6 +3,7 @@ import Logo from '../../common/assets/logo.svg?react';
 import Plus from '../../common/assets/plus.svg?react';
 import clsx from 'clsx';
 import { WizardLayout } from '../../components/wizard-layout.js';
+import { KeySquareIcon } from 'lucide-react';
 
 type OptionCardProps = {
   title: string;
@@ -35,9 +36,10 @@ export const OptionCard = ({ title, description, icon, disabled, onClick, testId
 
 type StartViewProps = {
   onCreateClicked: () => void;
+  onRestoreClicked: () => void;
 };
 
-export const StartView = ({ onCreateClicked }: StartViewProps) => (
+export const StartView = ({ onCreateClicked, onRestoreClicked }: StartViewProps) => (
   <WizardLayout headerShown={false}>
     <div className="flex flex-1 flex-col items-center justify-center gap-8 p-4 text-center">
       <div className="flex flex-col justify-center items-center gap-6">
@@ -51,6 +53,14 @@ export const StartView = ({ onCreateClicked }: StartViewProps) => (
           icon={<Plus />}
           onClick={onCreateClicked}
           testId="onboarding/createWalletButton"
+        />
+
+        <OptionCard
+          title="Restore account"
+          description="Import from private key"
+          icon={<KeySquareIcon />}
+          onClick={onRestoreClicked}
+          testId="accounts/import"
         />
       </div>
     </div>

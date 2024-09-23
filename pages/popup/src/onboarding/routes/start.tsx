@@ -7,6 +7,7 @@ import { accountsAtom } from '@src/atoms.js';
 export const StartRoute = () => {
   const navigate = useNavigate();
   const accounts = useAtomValue(accountsAtom);
+  console.log('ACCOUNTS', accounts);
 
   useEffect(() => {
     if (accounts.length > 0) {
@@ -14,5 +15,10 @@ export const StartRoute = () => {
     }
   }, [accounts]);
 
-  return <StartView onCreateClicked={() => navigate('/onboarding/create')} />;
+  return (
+    <StartView
+      onCreateClicked={() => navigate('/onboarding/create')}
+      onRestoreClicked={() => navigate('/accounts/import')}
+    />
+  );
 };

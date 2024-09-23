@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { accountsAtom, currentWalletAtom } from '@src/atoms.js';
 import { OptionCard } from '@src/onboarding/views/start.js';
-import { Copy, Plus } from 'lucide-react';
+import { Copy, KeySquareIcon, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -62,6 +62,14 @@ export const SwitchAccounts = () => {
           icon={<Plus />}
           onClick={() => navigate('/onboarding/create')}
           testId="onboarding/createWalletButton"
+        />
+
+        <OptionCard
+          title="Restore account"
+          description="Import from private key"
+          icon={<KeySquareIcon />}
+          onClick={() => navigate('/accounts/import')}
+          testId="accounts/import"
         />
       </div>
     </div>
