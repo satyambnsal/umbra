@@ -82,7 +82,9 @@ export const OverviewView = ({ publicAddress }: OverviewViewProps) => {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {payTransactions.length > 0 ? (
-              payTransactions.map(tx => <TxTile key={tx.txHash} tx={tx} currentWalletAddress={publicAddress} />)
+              payTransactions
+                .slice(0, 2)
+                .map(tx => <TxTile key={tx.txHash} tx={tx} currentWalletAddress={publicAddress} />)
             ) : (
               <p className="col-span-2">No transactions yet.</p>
             )}

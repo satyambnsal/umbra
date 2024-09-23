@@ -3,7 +3,6 @@ import { PXE, AccountWalletWithSecretKey } from '@aztec/aztec.js';
 import type { PayTransaction, TokenContract } from '@extension/storage/lib/types.js';
 import { atom } from 'jotai';
 import { RPC_URL } from './constants.js';
-import { walletStorage } from '@extension/storage';
 
 export type TransactionStatus = 'dropped' | 'pending' | 'success';
 export type PayTransactionFull = PayTransaction & {

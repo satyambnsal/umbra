@@ -9,7 +9,7 @@ export const TxTile = ({ tx, currentWalletAddress }: { tx: PayTransactionFull; c
   const kind = from === currentWalletAddress ? 'outgoing' : to === currentWalletAddress ? 'incoming' : 'other';
 
   return (
-    <Link to={`/transactions/${txHash}`} className="[&:nth-child(3)]:hidden sm:[&:nth-child(3)]:flex">
+    <Link to={`/transactions/${txHash}`}>
       <div className="card bg-secondary p-4 aspect-square grid-col gap-1 justify-between">
         <div className="btn btn-circle bg-neutral">
           <TxIcon kind={kind} />

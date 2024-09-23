@@ -21,7 +21,11 @@ export const useLoadTransactions = () => {
       const jsonReceipts = receipts.map(receipt => receipt?.toJSON()).filter(receipt => receipt !== undefined);
 
       const transactions = mergeTxWithReceipt(transactionsStorageData, jsonReceipts) as PayTransactionFull[];
-      setPayTransactions([...payTransactions, ...transactions]);
+
+      console.log('TRANSACTIONS IN USE LOAD TRANSACTIONS FIRST', transactions);
+      // setPayTransactions([...payTransactions, ...transactions]);
+      setPayTransactions(transactions);
+      console.log('TRANSACTIONS IN USE LOAD TRANSACTIONS AFTER', [...payTransactions, ...transactions]);
     } catch (error) {
       console.error(`Failed to load transactions from storage`, error);
     }

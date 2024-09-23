@@ -22,12 +22,6 @@ export const TransactionsView = () => {
   const [currentFilter, setCurrentFilter] = useState(Filters.all);
   const payTransactions = useAtomValue(payTransactionsAtom);
 
-  // const txsFiltered = payTransactions.filter(tx => {
-  //   if (currentFilter === Filters.all) return true;
-  //   const kind = tx.from === publicAddress ? 'outgoing' : tx.to === publicAddress ? 'incoming' : 'other';
-  //   return kind === (currentFilter === Filters.sent ? 'outgoing' : 'incoming');
-  // });
-
   return (
     <div className="flex flex-col flex-1 bg-[#1a2b3c]" data-testid="appLayout">
       <MenuBar variant="dashboard" />

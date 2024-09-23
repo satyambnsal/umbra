@@ -1,13 +1,12 @@
-import { TokenContract } from '@extension/storage/lib/types.js';
+import type { TokenContract } from '@extension/storage/lib/types.js';
 import { currentWalletAtom, tokenContractsAtom } from '@src/atoms.js';
 import { SettingsPageLayout } from '@src/components/settings-page-layout.js';
 import { useAccount } from '@src/hooks/useAccount.js';
 import clsx from 'clsx';
 import { useAtomValue } from 'jotai';
 import { Loader2Icon } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SelectTokenDropdown } from '../components/select-token-dropdown.js';
-import { walletStorage } from '@extension/storage';
 import { TokenContract as TokenContractAztec } from '@aztec/noir-contracts.js';
 import { AztecAddress, Fr } from '@aztec/circuits.js';
 import { computeSecretHash, ExtendedNote, Note } from '@aztec/aztec.js';

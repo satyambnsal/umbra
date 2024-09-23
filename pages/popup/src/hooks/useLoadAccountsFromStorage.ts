@@ -1,17 +1,17 @@
 import { getSchnorrAccount } from '@aztec/accounts/schnorr';
-import { AccountWalletWithSecretKey } from '@aztec/aztec.js';
+import type { AccountWalletWithSecretKey } from '@aztec/aztec.js';
 import { deriveSigningKey, Fr } from '@aztec/circuits.js';
 import { useStorage } from '@extension/shared';
 import { walletStorage } from '@extension/storage';
 import { accountsAtom, currentWalletAtom, pxeAtom } from '@src/atoms.js';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
 export const useLoadAccountFromStorage = () => {
   const walletData = useStorage(walletStorage);
   const pxeClient = useAtomValue(pxeAtom);
   const setAccounts = useSetAtom(accountsAtom);
-  const setCurrentWallet = useSetAtom(currentWalletAtom);
+  const [currentWallet, setCurrentWallet] = useAtom(currentWalletAtom);
 
   const storageAccounts = walletData.accounts;
   console.log('Storage Accounts', storageAccounts);
@@ -45,10 +45,10 @@ export const useLoadAccountFromStorage = () => {
         if (wallet) return { alias, account: wallet };
         return null;
       });
-      let accounts = (await Promise.all(accountsPromises)).filter(account => account !== null);
+      const accounts = (await Promise.all(accountsPromises)).filter(account => account !== null);
       setAccounts(accounts);
       if (accounts.length > 0) {
-        setCurrentWallet(accounts[0]);
+        currentWallet ? setCurrentWallet(currentWallet) : setCurrentWallet(accounts[0]);
       }
     } catch (err) {
       console.log('Failed to load aaccounts from storage', err);

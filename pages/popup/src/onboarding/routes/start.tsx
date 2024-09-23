@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { StartView } from '../views/start.js';
 import { useNavigate } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
@@ -12,6 +12,7 @@ export const StartRoute = () => {
     if (accounts.length > 0) {
       return navigate('/dashboard');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts]);
 
   return <StartView onCreateClicked={() => navigate('/onboarding/create')} />;
