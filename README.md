@@ -28,34 +28,7 @@ See Umbra wallet in action! Check out our walkthrough video showcasing the featu
 ### Prerequisites 📌
 
 - [pnpm](https://pnpm.io/installation)
-- [Docker](https://www.docker.com/get-started)
-- Aztec CLI (instructions below)
 
-### Aztec CLI and Sandbox Setup
-
-1. Install the Aztec CLI:
-
-   For macOS and Linux:
-   ```bash
-   bash -i <(curl -s https://install.aztec.network)
-   ```
-
-   For Windows:
-   - Install [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install)
-   - Open a WSL terminal
-   - Run the following command:
-     ```bash
-     bash -i <(curl -s https://install.aztec.network)
-     ```
-
-2. Ensure Docker is running on your system.
-
-3. Start the Aztec Sandbox:
-   ```shell
-   aztec start --sandbox
-   ```
-
-Note: You must have the Aztec Sandbox running locally for this project to work correctly.
 
 ### Installation 💻
 
