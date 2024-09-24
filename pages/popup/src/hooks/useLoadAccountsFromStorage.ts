@@ -4,14 +4,14 @@ import { deriveSigningKey, Fr } from '@aztec/circuits.js';
 import { useStorage } from '@extension/shared';
 import { walletStorage } from '@extension/storage';
 import { accountsAtom, currentWalletAtom, pxeAtom } from '@src/atoms.js';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
 export const useLoadAccountFromStorage = () => {
   const walletData = useStorage(walletStorage);
   const pxeClient = useAtomValue(pxeAtom);
   const setAccounts = useSetAtom(accountsAtom);
-  const [currentWallet, setCurrentWallet] = useAtom(currentWalletAtom);
+  const setCurrentWallet = useSetAtom(currentWalletAtom);
 
   const storageAccounts = walletData.accounts;
   console.log('Storage Accounts', storageAccounts);
@@ -48,7 +48,7 @@ export const useLoadAccountFromStorage = () => {
       const accounts = (await Promise.all(accountsPromises)).filter(account => account !== null);
       setAccounts(accounts);
       if (accounts.length > 0) {
-        currentWallet ? setCurrentWallet(currentWallet) : setCurrentWallet(accounts[0]);
+        setCurrentWallet(accounts[0]);
       }
     } catch (err) {
       console.log('Failed to load aaccounts from storage', err);

@@ -59,6 +59,14 @@ export const MenuDrawer = () => {
               Accounts
             </button>
 
+            <button
+              type="button"
+              className="text-3xl text-left"
+              onClick={() => navigate('/contacts')}
+              data-testid="menu/addressBook">
+              Address Book
+            </button>
+
             <button type="button" onClick={() => navigate('/settings')}>
               Settings
             </button>
