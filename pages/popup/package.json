@@ -24,7 +24,7 @@
     "@aztec/accounts": "0.51.0",
     "@aztec/aztec.js": "0.51.0",
     "@aztec/circuits.js": "0.51.0",
-    "@aztec/kv-store": "^0.52.0",
+    "@aztec/kv-store": "^0.56.0",
     "@aztec/noir-contracts.js": "0.51.0",
     "@extension/content-runtime-script": "workspace:*",
     "@extension/shared": "workspace:*",
